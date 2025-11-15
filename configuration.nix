@@ -28,7 +28,6 @@
     enable = true;
     xwayland.enable = true; 
   };  
-
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -94,6 +93,11 @@
    waybar
    hyprpaper
    nwg-displays 
+   wallust
+   fastfetch
+   zathura
+   cava
+   fzf
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 

@@ -1,5 +1,20 @@
  { config, pkgs, ... }: 
 
+ let 
+    dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config"; 
+    create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
+
+    # .config/directory 
+    configs = {
+	nvim = "nvim";
+	hypr = "hypr"; 
+	rofi = "rofi";
+	waybar = "waybar"; 
+	kitty = "kitty";
+	tmux = "tmux"; 
+    };
+ in 
+
  {
  	home.username = "arjester"; 
 	home.homeDirectory = "/home/arjester";
@@ -11,6 +26,7 @@
 			btw = "echo i use nix btw";
 			vi = "nvim"; 
 			nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#arjester";
+			config = "cd ~/nixos-dotfiles/config"; 
 		};
 		profileExtra = ''
 			if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
@@ -19,6 +35,14 @@
 		'';
 	};
 
+	xdg.configFile = builtins.mapAttrs
+	    (name: subpath: {
+		source = create_symlink "${dotfiles}/${subpath}";
+		recursive = true;
+		force = true;
+	    })
+	    configs; 
+
 	home.packages = with pkgs; [
 	    neovim 
 	    ripgrep
@@ -26,8 +50,4 @@
 	    gcc
 	    rofi 
 	]; 
-
-	home.file.".config/hypr".source = ./config/hypr; 
-	home.file.".config/waybar".source = ./config/waybar; 
-	home.file.".config/nvim".source = ./config/nvim; 
  }
