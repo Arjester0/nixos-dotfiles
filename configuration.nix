@@ -98,6 +98,9 @@
    zathura
    cava
    fzf
+   cargo 
+   rustc
+   jetbrains.idea-community-bin
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 

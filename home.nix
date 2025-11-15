@@ -22,11 +22,14 @@
 	programs.git.enable = true;
 	programs.bash = {
 		enable = true;
+		sessionVariables = {
+		    PATH = "$HOME/.cargo/bin:$PATH"; 
+		};
 		shellAliases = {
-			btw = "echo i use nix btw";
 			vi = "nvim"; 
 			nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#arjester";
 			config = "cd ~/nixos-dotfiles/config"; 
+			qs = "quickshot"; 
 		};
 		profileExtra = ''
 			if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
@@ -34,6 +37,7 @@
 			fi 
 		'';
 	};
+	programs.fzf.enable = true;
 
 	xdg.configFile = builtins.mapAttrs
 	    (name: subpath: {
@@ -49,5 +53,6 @@
 	    nixpkgs-fmt
 	    gcc
 	    rofi 
+	    fzf
 	]; 
  }
