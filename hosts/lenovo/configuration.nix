@@ -28,6 +28,10 @@
     enable = true;
     xwayland.enable = true; 
   };  
+  
+
+  programs.zsh.enable = true;
+  users.users.arjester.shell = pkgs.zsh; 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -101,6 +105,9 @@
    cargo 
    rustc
    jetbrains.idea-community-bin
+   zsh
+   jujutsu 
+   discord
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
