@@ -1,5 +1,5 @@
 {
-	description = "Hyprland on Nixos";
+	description = "Arjester's Based Nixos Configs";
 
 	inputs = {
 		nixpkgs.url = "nixpkgs/nixos-unstable"; 
@@ -12,13 +12,13 @@
 	outputs = { nixpkgs, home-manager, ... }: {
 		nixosConfigurations.arjester = nixpkgs.lib.nixosSystem {
 			modules = [
-				./configuration.nix
+				./hosts/lenovo/configuration.nix
 				home-manager.nixosModules.home-manager
 				{
 					home-manager = {
 						useGlobalPkgs = true;
 						useUserPackages = true;
-						users.arjester = import ./home.nix;
+						users.arjester = import ./modules/home.nix;
 						backupFileExtension = "backup"; 
 					};
 				}

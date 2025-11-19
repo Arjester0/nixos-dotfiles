@@ -107,7 +107,6 @@
    jetbrains.idea-community-bin
    zsh
    jujutsu 
-   discord
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 

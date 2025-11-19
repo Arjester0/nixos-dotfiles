@@ -1,8 +1,5 @@
  { config, pkgs, ... }: 
 
- imports = [
-    ./zsh.nix
- ]; 
 
  let 
     dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config"; 
@@ -20,6 +17,9 @@
  in 
 
  {
+	 imports = [
+	    ./zsh.nix
+	 ]; 
  	home.username = "arjester"; 
 	home.homeDirectory = "/home/arjester";
 	home.stateVersion = "25.05";
@@ -43,3 +43,4 @@
 	    zsh
 	]; 
  }
+
