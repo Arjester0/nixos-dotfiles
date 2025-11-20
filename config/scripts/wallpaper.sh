@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-WALLPAPER_DIR="$HOME/walls/"
+WALLPAPER_DIR="$HOME/Pictures/walls/"
 CONF="$HOME/nixos-dotfiles/config/hypr/hyprpaper.conf" 
 
 entries=""
@@ -19,7 +19,10 @@ full="$WALLPAPER_DIR$chosen"
     echo "wallpaper = ,$full"
 } > "$CONF" 
 
+wallust run "$WALLPAPER_DIR/$chosen"
+
 pkill hyprpaper
 hyprpaper 
+pkill waybar
+waybar
 
-wallust run "$WALLPAPER_DIR/$chosen"

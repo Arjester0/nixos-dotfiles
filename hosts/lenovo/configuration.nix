@@ -107,6 +107,7 @@
    jetbrains.idea-community-bin
    zsh
    jujutsu 
+   hyprcursor
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
