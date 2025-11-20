@@ -109,6 +109,7 @@
    zsh
    jujutsu 
    hyprcursor
+   gh
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
