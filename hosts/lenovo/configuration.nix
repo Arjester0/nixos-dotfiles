@@ -29,7 +29,6 @@
     enable = true;
     xwayland.enable = true; 
   };  
-  
 
   programs.zsh.enable = true;
   users.users.arjester.shell = pkgs.zsh; 
@@ -110,6 +109,8 @@
    jujutsu 
    hyprcursor
    gh
+   gdb
+   hyprshot
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
