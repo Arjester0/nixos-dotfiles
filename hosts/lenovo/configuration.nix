@@ -29,10 +29,14 @@
     enable = true;
     xwayland.enable = true; 
   };  
+  programs.hyprlock.enable = true;
+  security.pam.services.hyprlock = {}; 
+  services.hypridle.enable = true;
 
   programs.zsh.enable = true;
   users.users.arjester.shell = pkgs.zsh; 
-  # Configure network proxy if necessary
+
+ # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
@@ -111,6 +115,8 @@
    gh
    gdb
    hyprshot
+   hyprlock
+   hypridle
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 

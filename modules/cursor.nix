@@ -19,7 +19,7 @@
         };
     in
       getFrom 
-        "https://github.com/ful1e5/fuchsia-cursor/releases/download/v2.0.0/Fuchsia-Pop.tar.gz"
-        "sha256-BvVE9qupMjw7JRqFUj1J0a4ys6kc9fOLBPx2bGaapTk="
-        "Fuchsia-Pop";
+        "https://github.com/ful1e5/Bibata_Cursor/releases/download/v2.0.7/Bibata-Original-Classic.tar.xz"
+        "sha256-xFfD2JF521JP1tWp1sowSMv20BtwcPMHQQ5jBsvMFOA="
+        "Bibata-Original-Classic";
 } 

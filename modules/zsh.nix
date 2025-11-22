@@ -28,7 +28,7 @@
 	      exec hyprland
 	     fi 
 	    '';
-	    initExtra = ''
+	    initContent = ''
 		fastfetch
 	    ''; 
 	    oh-my-zsh = {
