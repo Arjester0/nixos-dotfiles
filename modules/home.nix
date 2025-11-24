@@ -19,6 +19,7 @@
 	 imports = [
 	    ./zsh.nix
 	    ./cursor.nix
+	    ./notifs.nix
 	]; 
  	home.username = "arjester"; 
 	home.homeDirectory = "/home/arjester";
