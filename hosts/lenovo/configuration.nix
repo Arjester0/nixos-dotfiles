@@ -117,7 +117,7 @@
    hyprshot
    hyprlock
    hypridle
-   swaynotificationcenter
+   mako
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
