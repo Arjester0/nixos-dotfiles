@@ -118,6 +118,7 @@
    hyprlock
    hypridle
    mako
+   libnotify
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 

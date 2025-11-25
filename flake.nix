@@ -1,4 +1,3 @@
-# thing 
 {
 	description = "Arjester's Based Nixos Configs";
 
