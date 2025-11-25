@@ -25,14 +25,6 @@
 	home.stateVersion = "25.05";
 	programs.git.enable = true;
 
-	programs.mako = {
-	    enable = true;
-	    defaultTimeout = 5000;
-	    layer = "overlay"; 
-	    backgroundColor = "#1e1e2e";
-	    textColor = "cdd6f4";
-	};  
-
 	xdg.configFile = builtins.mapAttrs
 	    (name: subpath: {
 		source = create_symlink "${dotfiles}/${subpath}";
