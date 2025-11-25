@@ -24,6 +24,7 @@
 	home.homeDirectory = "/home/arjester";
 	home.stateVersion = "25.05";
 	programs.git.enable = true;
+	programs.mako.enable = true;
 
 	xdg.configFile = builtins.mapAttrs
 	    (name: subpath: {
