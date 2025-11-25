@@ -21,8 +21,7 @@ full="$WALLPAPER_DIR$chosen"
 
 wallust run "$WALLPAPER_DIR/$chosen"
 
-
-systemctl --user restart mako
+makoctl reload 
 
 pkill hyprpaper
 hyprpaper 

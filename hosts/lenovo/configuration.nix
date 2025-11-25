@@ -66,10 +66,13 @@
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
+  hardware.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    pulse.enable = true;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
@@ -119,6 +122,8 @@
    hypridle
    mako
    libnotify
+   pavucontrol
+   pamixer
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
