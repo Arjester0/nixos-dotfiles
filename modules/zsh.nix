@@ -8,6 +8,7 @@
 	    sessionVariables = {
 		PATH = "$HOME/.cargo/bin:$PATH"; 
 		HYPRSHOT_DIR = "$HOME/Pictures/screenshots";
+		EDITOR = "nvim"; 
 	    };
 
 	    shellAliases = {

@@ -124,6 +124,7 @@
    libnotify
    pavucontrol
    pamixer
+   yazi
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
