@@ -125,6 +125,8 @@
    pavucontrol
    pamixer
    yazi
+   quickshell
+   zellij
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 

@@ -1,46 +1,46 @@
 * {
-active-background: #FF5BEE;
-active-foreground: #F2FCFF;
-normal-background: #27272A;
-normal-foreground: #F2FCFF;
-urgent-background: #CFA17F;
-urgent-foreground: #F2FCFF;
+active-background: #BA925D;
+active-foreground: #FCFBED;
+normal-background: #231B1A;
+normal-foreground: #FCFBED;
+urgent-background: #A8C4DE;
+urgent-foreground: #FCFBED;
 
-alternate-active-background: #6AB031;
-alternate-active-foreground: #F2FCFF;
-alternate-normal-background: #27272A;
-alternate-normal-foreground: #F2FCFF;
-alternate-urgent-background: #27272A;
-alternate-urgent-foreground: #F2FCFF;
+alternate-active-background: #AD8194;
+alternate-active-foreground: #FCFBED;
+alternate-normal-background: #231B1A;
+alternate-normal-foreground: #FCFBED;
+alternate-urgent-background: #231B1A;
+alternate-urgent-foreground: #FCFBED;
 
-selected-active-background: #CFA17F;
-selected-active-foreground: #F2FCFF;
-selected-normal-background: #CFA17F;
-selected-normal-foreground: #F2FCFF;
-selected-urgent-background: #FF5BEE;
-selected-urgent-foreground: #F2FCFF;
+selected-active-background: #A8C4DE;
+selected-active-foreground: #FCFBED;
+selected-normal-background: #A8C4DE;
+selected-normal-foreground: #FCFBED;
+selected-urgent-background: #BA925D;
+selected-urgent-foreground: #FCFBED;
 
-background-color: #27272A;
+background-color: #231B1A;
 background: rgba(0,0,0,0.7);
-foreground: #F2FCFF;
-border-color: #FF5BEE;
+foreground: #FCFBED;
+border-color: #BA925D;
 
-color0: #4D4D50;
-color1: #21AEB1;
-color2: #969CC5;
-color3: #6AB031;
-color4: #FF5BEE;
-color5: #CFA17F;
-color6: #DBF5FE;
-color7: #E4F2F6;
-color8: #A0A9AC;
-color9: #21AEB1;
-color10: #969CC5;
-color11: #6AB031;
-color12: #FF5BEE;
-color13: #CFA17F;
-color14: #DBF5FE;
-color15: #E4F2F6;
+color0: #4B4140;
+color1: #B71E3D;
+color2: #47714E;
+color3: #AD8194;
+color4: #BA925D;
+color5: #A8C4DE;
+color6: #F7F4CB;
+color7: #F3F1DD;
+color8: #AAA99A;
+color9: #B71E3D;
+color10: #47714E;
+color11: #AD8194;
+color12: #BA925D;
+color13: #A8C4DE;
+color14: #F7F4CB;
+color15: #F3F1DD;
 
 
 }
