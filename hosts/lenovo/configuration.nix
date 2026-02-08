@@ -54,7 +54,13 @@
   #  enable = true;
   #  windowManager.qtile.enable = true;
   # };  
-  
+
+  # OpenGL shit 
+  hardware.opengl.enable = true; 
+
+  # Bluetooth 
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -127,6 +133,14 @@
    yazi
    quickshell
    zellij
+   zoxide
+   glfw
+   mesa
+   libGL
+   pkg-config
+   unzip
+   clang-tools
+   clang
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
