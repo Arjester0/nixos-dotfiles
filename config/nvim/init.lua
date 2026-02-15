@@ -228,7 +228,7 @@ map({ "v", "x", "n" }, "<C-y>", '"+y', { desc = "System clipboard yank" })
 
 -- Telescope
 map("n", "<leader>f", builtin.find_files, { desc = "Telescope find files" })
-map("n", "<leader>g", builtin.live_grep, { desc = "Telescope live grep" })
+map("n", "<leader>gp", builtin.live_grep, { desc = "Telescope live grep" })
 map("n", "<leader>sb", builtin.buffers, { desc = "Telescope buffers" })
 map("n", "<leader>si", builtin.grep_string, { desc = "Telescope grep string" })
 map("n", "<leader>so", builtin.oldfiles, { desc = "Telescope old files" })

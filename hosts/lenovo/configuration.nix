@@ -36,6 +36,18 @@
   programs.zsh.enable = true;
   users.users.arjester.shell = pkgs.zsh; 
 
+  fonts.packages = with pkgs; [
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+ ]; 
+    i18n.inputMethod = {
+      type = "fcitx5";
+      enable = true;
+      fcitx5.addons = with pkgs; [
+	fcitx5-mozc
+	fcitx5-gtk
+      ];
+    };
  # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
