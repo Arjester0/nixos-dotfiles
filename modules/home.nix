@@ -61,12 +61,6 @@
 	home.sessionVariables = {
 	  GTK_THEME = "Colloid-Dark";
 	};
-	```
-
-	And update the env vars in `hyprland.conf`:
-	```
-	env = GTK_THEME,Colloid-Dark
-	env = GTK_ICON_THEME,Colloid-Dark
 
 	xdg.configFile = builtins.mapAttrs
 	    (name: subpath: {
