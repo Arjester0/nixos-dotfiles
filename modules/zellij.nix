@@ -13,6 +13,8 @@
     default_shell "zsh"
     on_force_close "detach"
     copy_on_select false
+    show_tab_bar = true
+    tab_bar_at_bottom = false
     themes {
 	blue-archive {
 	  fg     "#C8D8F0"
