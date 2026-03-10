@@ -36,6 +36,15 @@
   programs.zsh.enable = true;
   users.users.arjester.shell = pkgs.zsh; 
 
+  programs.steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+}; 
+
+  nixpkgs.config.allowUnfree = true;
+
   fonts.packages = with pkgs; [
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
@@ -67,8 +76,8 @@
   #  windowManager.qtile.enable = true;
   # };  
 
-  # OpenGL shit 
-  hardware.opengl.enable = true; 
+  # Graphics (hardware.opengl is deprecated, use hardware.graphics instead)
+  hardware.graphics.enable = true; 
 
   # Bluetooth 
   hardware.bluetooth.enable = true;
@@ -118,7 +127,6 @@
    git 
    tmux 
    helix
-   wget
    waybar
    hyprpaper
    nwg-displays 
@@ -126,11 +134,9 @@
    fastfetch
    zathura
    cava
-   fzf
    cargo 
    rustc
    jetbrains.idea-community-bin
-   zsh
    jujutsu 
    hyprcursor
    gh
@@ -144,7 +150,6 @@
    pamixer
    yazi
    quickshell
-   zellij
    zoxide
    glfw
    mesa
@@ -153,6 +158,8 @@
    unzip
    clang-tools
    clang
+   tesseract
+   emacs
  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
