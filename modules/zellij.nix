@@ -13,6 +13,8 @@
     default_shell "zsh"
     on_force_close "detach"
     copy_on_select false
+    simplified_ui false
+    hide_session_name false
     themes {
 	blue-archive {
 	  fg     "#C8D8F0"
