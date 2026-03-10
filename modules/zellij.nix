@@ -4,16 +4,6 @@
   programs.zellij = {
     enable = true;
     enableZshIntegration = true;
-    settings = {
-      theme = "gruvbox-dark";
-      default_layout = "battlestation";
-      pane_frames = false;
-      mouse_mode = false;
-      default_shell = "zsh";
-      on_force_close = "detach";
-      copy_on_select = false;
-      simplified_ui = false;
-    };
   };
 
   # Main config — keybinds live here because home-manager settings
@@ -112,4 +102,23 @@
       }
     }
   '';
+
+  xdg.configFile."zellij/layouts/default.kdl".text = ''
+      layout {
+	tab name="shell" focus=true {
+	  pane split_direction="vertical" {
+	    pane size="70%" focus=true
+	    pane size="30%"
+	  }
+	}
+	floating_panes {
+	  pane {
+	    x "10%"
+	    y "10%"
+	    width "80%"
+	    height "80%"
+	  }
+	}
+      }
+    '';
 }

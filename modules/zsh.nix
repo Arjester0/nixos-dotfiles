@@ -26,8 +26,6 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
-    # remove oh-my-zsh block entirely
-
     sessionVariables = {
       PATH = "$HOME/.cargo/bin:$PATH";
       HYPRSHOT_DIR = "$HOME/Pictures/screenshots";
@@ -35,7 +33,9 @@
     };
 
     shellAliases = {
-      ll = "ls -l";
+      ll = "eza -la";
+      ls = "eza";
+      cat = "bat";
       vi = "nvim";
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#arjester";
       config = "cd ~/nixos-dotfiles/config";

@@ -26,6 +26,10 @@
 	home.homeDirectory = "/home/arjester";
 	home.stateVersion = "25.05";
 	programs.git.enable = true;
+	programs.zoxide = {
+	    enable = true;
+	    enableZshIntegration = true;
+	}; 
 
 	xdg.configFile = builtins.mapAttrs
 	    (name: subpath: {
@@ -41,8 +45,12 @@
 	    nixpkgs-fmt
 	    gcc
 	    rofi 
-	    fzf
-	    zsh
+	    eza
+	    bat
+	    fd
+	    jq
+	    tokei
+	    dust
 	]; 
  }
 
