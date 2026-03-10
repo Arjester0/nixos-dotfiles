@@ -1,23 +1,21 @@
 import Quickshell
 import Quickshell.Io
+import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
-
 // Music widget — bottom center, shows MPRIS player info + cava bars
 FloatingWindow {
     id: root
     visible: true
+    width: 680
+    height: 260
     color: "transparent"
-    width: 420
-    height: 80
 
     WlrLayershell.layer: WlrLayer.Overlay
-    WlrLayershell.anchors {
-        bottom: true
-    }
-    WlrLayershell.margins {
-        bottom: 12
-    }
+    WlrLayershell.anchors.bottom: true
+    WlrLayershell.anchors.left: true
+    WlrLayershell.margins.bottom: 12
+    WlrLayershell.margins.left: 20
     WlrLayershell.exclusiveZone: 0
 
     // Player state

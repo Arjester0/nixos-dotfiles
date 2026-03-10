@@ -1,8 +1,9 @@
 import Quickshell
+import QtQuick.Effects
 import Quickshell.Io
+import Quickshell.Wayland
 import QtQuick
 import QtQuick.Layouts
-
 // Overlay widget — bottom left, no background, blends into wallpaper
 // Shows: Yuuka art | clock + date + BA quote
 FloatingWindow {
@@ -12,21 +13,12 @@ FloatingWindow {
     height: 260
     color: "transparent"
 
-    // Position: bottom left, above taskbar
-    screen: Quickshell.screens[0]
-
-    // QML doesn't have direct x/y on FloatingWindow — use a wrapper
-    // Place via margins from edges
     WlrLayershell.layer: WlrLayer.Overlay
-    WlrLayershell.anchors {
-        bottom: true
-        left: true
-    }
-    WlrLayershell.margins {
-        bottom: 12
-        left: 20
-    }
-    WlrLayershell.exclusiveZone: 0  // don't push other windows
+    WlrLayershell.anchors.bottom: true
+    WlrLayershell.anchors.left: true
+    WlrLayershell.margins.bottom: 12
+    WlrLayershell.margins.left: 20
+    WlrLayershell.exclusiveZone: 0
 
     property string timeText: "00:00"
     property string dateText: "Monday, January 01"
@@ -95,34 +87,36 @@ FloatingWindow {
             width: 220
             height: 260
 
-            Image {
-                id: yuukaImg
-                source: "file:///home/arjester/Pictures/yuuka-widget.png"
-                width: 220
-                height: 260
-                fillMode: Image.PreserveAspectCrop
-                anchors.fill: parent
-                smooth: true
+	    Image {
+        id: yuukaImg
+        source: "file:///home/arjester/Pictures/yuukawidget.jpeg"
+        anchors.fill: parent
+        fillMode: Image.PreserveAspectCrop
+        smooth: true
+        visible: false
+	 }
 
-                // Fade right edge into transparent
-                layer.enabled: true
-                layer.effect: ShaderEffect {
-                    fragmentShader: "
-                        uniform lowp sampler2D source;
-                        uniform lowp float qt_Opacity;
-                        varying highp vec2 qt_TexCoord0;
-                        void main() {
-                            lowp vec4 tex = texture2D(source, qt_TexCoord0);
-                            // fade out toward right edge
-                            float fade = 1.0 - smoothstep(0.55, 1.0, qt_TexCoord0.x);
-                            // also fade bottom edge slightly
-                            float fadeBottom = 1.0 - smoothstep(0.85, 1.0, qt_TexCoord0.y);
-                            gl_FragColor = tex * qt_Opacity * fade * fadeBottom;
-                        }
-                    "
-                }
-            }
+    Rectangle {
+        id: fadeMask
+        anchors.fill: parent
+        visible: false
+        gradient: Gradient {
+            orientation: Gradient.Horizontal
+            GradientStop { position: 0.0; color: "#ffffffff" }
+            GradientStop { position: 0.6; color: "#ffffffff" }
+            GradientStop { position: 1.0; color: "#00000000" }
         }
+    }
+
+    MultiEffect {
+        source: yuukaImg
+        anchors.fill: parent
+        maskEnabled: true
+        maskSource: fadeMask
+        maskThresholdMin: 0.0
+        maskSpreadAtMin: 1.0
+    }
+}
 
         // Text: clock, date, quote
         Column {
