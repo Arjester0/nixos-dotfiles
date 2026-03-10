@@ -1,0 +1,96 @@
+╔══════════════════════════════════════════════════════════════╗
+║                      KEYBINDS REFERENCE                      ║
+╚══════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ZELLIJ
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Panes
+  ─────
+  Alt + h/j/k/l          Move focus between panes
+  Alt + -                Split pane horizontally (new pane below)
+  Alt + |                Split pane vertically (new pane right)
+  Alt + x                Close focused pane
+  Alt + Space            Toggle fullscreen on focused pane
+  Alt + f                Toggle floating panes show/hide
+  Alt + F                Toggle current pane floating/embedded
+  Alt + g                New floating scratchpad pane
+
+  Tabs
+  ────
+  Alt + t                New tab
+  Alt + [                Previous tab
+  Alt + ]                Next tab
+  Alt + 1-5              Jump to tab by number
+  Alt + r                Rename current tab
+
+  Resize
+  ──────
+  Alt + =                Increase pane size
+  Alt + _                Decrease pane size
+
+  Scroll
+  ──────
+  Alt + u                Half page scroll up
+  Alt + e                Half page scroll down
+
+  Session
+  ───────
+  Alt + d                Detach session (keeps running in background)
+  Alt + Shift + l        Lock zellij (pass all keys to app)
+  Alt + Shift + l        Unlock zellij (when locked)
+
+  Special
+  ───────
+  Alt + o                Open todo.txt in floating pane
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ZSH / SHELL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Ctrl + f               Fuzzy find file, open in nvim
+  Ctrl + g               Live grep, open at matching line in nvim
+  Ctrl + r               Atuin history search (if installed)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ALIASES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  nrs                    nixos-rebuild switch (rebuild + switch)
+  vi                     nvim
+  ll                     eza -la
+  ls                     eza
+  cat                    bat
+  config                 cd ~/nixos-dotfiles/config
+  qs                     quickshot
+  z <name>               Jump to directory with zoxide
+  y                      Open yazi file manager (cd on exit)
+  jjl                    jj log
+  jjs                    jj status
+  jjd                    jj diff
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  JUJUTSU (jj)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  jj log                 Show commit graph
+  jj st                  Show working copy status
+  jj diff                Show current changes
+  jj commit -m "msg"     Commit working copy
+  jj new -m "msg"        Start a new change (like git checkout -b)
+  jj git push            Push to remote
+  jj git fetch           Fetch from remote
+  jj undo                Undo last operation
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  DIRENV
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  direnv allow           Trust .envrc in current directory
+  direnv deny            Revoke trust for current directory
+  direnv reload          Reload current .envrc manually
+
+  .envrc for nix flake:  echo "use flake" > .envrc && direnv allow
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

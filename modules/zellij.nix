@@ -26,6 +26,9 @@
         bind "Alt k" { MoveFocus "Up"; }
         bind "Alt j" { MoveFocus "Down"; }
 
+	bind "Alt o" { Run "nvim" "/home/arjester/Downloads/obsidian/todo.txt" { floating true; x "15%"; y "10%"; width "70%"; height "80%"; }; SwitchToMode "Normal"; }
+	bind "Alt ?" { Run "nvim" "/home/arjester/path/to/keybinds.txt" { floating true; x "5%"; y "5%"; width "90%"; height "90%"; }; SwitchToMode "Normal"; }
+
         // Pane split
         bind "Alt -" { NewPane "Down"; }
         bind "Alt |" { NewPane "Right"; }
@@ -41,7 +44,7 @@
         bind "Alt F" { TogglePaneEmbedOrFloating; }
 
         // New floating pane (scratchpad)
-        bind "Alt g" { NewFloatingPane; }
+	bind "Alt g" { Run "zsh" { floating true; x "10%"; y "10%"; width "80%"; height "80%"; }; SwitchToMode "Normal"; }
 
         // Tabs
         bind "Alt t" { NewTab; }

@@ -21,6 +21,7 @@
 	    ./cursor.nix
 	    ./direnv.nix
 	    ./zellij.nix
+	    ./helix.nix
 	]; 
  	home.username = "arjester"; 
 	home.homeDirectory = "/home/arjester";
@@ -51,6 +52,8 @@
 	    jq
 	    tokei
 	    dust
+	    nixd
+	    nixfmt-rfc-style
 	]; 
  }
 
