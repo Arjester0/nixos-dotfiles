@@ -1,0 +1,10 @@
+[general]
+bars = 15
+bar_width = 1
+bar_spacing = 0
+
+[output]
+method = raw
+raw_target = /tmp/cava-fifo
+data_format = ascii
+ascii_max_range = 1000

@@ -13,6 +13,8 @@
 	kitty = "kitty";
 	tmux = "tmux"; 
 	mako = "mako";
+	cava = "cava";
+	quickshell = "quickshell";
     };
  in 
 
@@ -84,6 +86,8 @@
 	    dust
 	    nixd
 	    nixfmt-rfc-style
+	    playerctl
+	    cava
 	]; 
  }
 
