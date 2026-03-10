@@ -6,13 +6,28 @@
   };
 
   xdg.configFile."zellij/config.kdl".text = ''
-    theme "gruvbox-dark"
+    theme "blue-archive"
     default_layout "battlestation"
     pane_frames false
     mouse_mode false
     default_shell "zsh"
     on_force_close "detach"
     copy_on_select false
+    themes {
+	blue-archive {
+	  fg     "#C8D8F0"
+	  bg     "#0D1B2A"
+	  black  "#0D1B2A"
+	  red    "#FF6B8A"
+	  green  "#5DDBB0"
+	  yellow "#FFD485"
+	  blue   "#4DB8FF"
+	  magenta "#B8A0FF"
+	  cyan   "#7FE7F5"
+	  white  "#E8F0FF"
+	  orange "#FF9E6B"
+	}
+      }
     keybinds clear-defaults=true {
       shared_except "locked" {
         bind "Alt h" { MoveFocus "Left"; }

@@ -1,0 +1,152 @@
+/* ============================================================
+   ROFI THEME — Blue Archive / Hayase Yuuka
+   ============================================================ */
+
+* {
+    bg:         #00000A;
+    surface:    #0D1B2A;
+    surface2:   #112236;
+    borderc:    #1A2F45;
+    navy:       #2A5F8F;
+    fg:         #C8D8F0;
+    subtle:     #6A8AAA;
+    cyan:       #7FE7F5;
+    blue:       #4DB8FF;
+    lavender:   #B8A0FF;
+    pink:       #FF6B8A;
+    white:      #E8F0FF;
+    teal:       #5DDBB0;
+
+    background-color:   transparent;
+    text-color:         @fg;
+    font:               "JetBrainsMono Nerd Font Bold 13";
+}
+
+window {
+    background-color:   @bg;
+    border:             2px solid;
+    border-color:       @navy;
+    border-radius:      8px;
+    width:              580px;
+    padding:            0;
+    location:           center;
+}
+
+mainbox {
+    background-color:   transparent;
+    children:           [ inputbar, mode-switcher, listview ];
+    spacing:            0;
+}
+
+mode-switcher {
+    background-color:   @surface;
+    padding:            4px 8px;
+    spacing:            4px;
+    border:             0 0 1px 0;
+    border-color:       @borderc;
+}
+
+button {
+    background-color:   transparent;
+    text-color:         @subtle;
+    padding:            4px 14px;
+    border-radius:      4px;
+    cursor:             pointer;
+}
+
+button selected {
+    background-color:   #0d2a30;
+    text-color:         @cyan;
+    border:             0 0 1px 0;
+    border-color:       @cyan;
+    border-radius:      4px;
+}
+
+inputbar {
+    background-color:   @surface;
+    border:             0 0 2px 0;
+    border-color:       @cyan;
+    padding:            10px 14px;
+    spacing:            8px;
+    children:           [ prompt, entry ];
+}
+
+prompt {
+    background-color:   transparent;
+    text-color:         @cyan;
+    padding:            0 6px 0 0;
+}
+
+entry {
+    background-color:   transparent;
+    text-color:         @white;
+    placeholder:        "Search...";
+    placeholder-color:  @subtle;
+    cursor:             text;
+}
+
+listview {
+    background-color:   transparent;
+    padding:            8px;
+    spacing:            2px;
+    lines:              8;
+    columns:            1;
+    scrollbar:          false;
+    border:             0;
+}
+
+element {
+    background-color:   transparent;
+    padding:            8px 10px;
+    border-radius:      4px;
+    spacing:            10px;
+    cursor:             pointer;
+    children:           [ element-icon, element-text ];
+}
+
+element normal.normal {
+    background-color:   transparent;
+    text-color:         @fg;
+}
+
+element normal.urgent {
+    background-color:   #1a0a0e;
+    text-color:         @pink;
+}
+
+element selected.normal {
+    background-color:   #0a1f2a;
+    text-color:         @cyan;
+    border:             0 0 0 3px;
+    border-color:       @cyan;
+    border-radius:      4px;
+}
+
+element selected.urgent {
+    background-color:   #1a0a0e;
+    text-color:         @pink;
+}
+
+element alternate.normal {
+    background-color:   transparent;
+    text-color:         @fg;
+}
+
+element-icon {
+    size:               22px;
+    background-color:   transparent;
+    cursor:             inherit;
+}
+
+element-text {
+    background-color:   transparent;
+    text-color:         inherit;
+    cursor:             inherit;
+}
+
+scrollbar {
+    background-color:   @surface2;
+    handle-color:       @navy;
+    handle-width:       4px;
+    border-radius:      2px;
+}

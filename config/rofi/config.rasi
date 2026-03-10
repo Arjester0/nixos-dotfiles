@@ -1,0 +1,13 @@
+configuration {
+    modi:                       "drun";
+    show-icons:                 true;
+    icon-theme:                 "Papirus";
+    drun-display-format:        "{name}";
+    display-drun:               "  Apps";
+    matching:                   "fuzzy";
+    sort:                       true;
+    sorting-method:             "fzf";
+    max-history-size:           25;
+}
+
+@theme "~/.config/rofi/theme.rasi"
