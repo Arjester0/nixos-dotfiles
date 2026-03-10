@@ -2,7 +2,7 @@
 {
   programs.zellij = {
     enable = true;
-    enableZshIntegration = true;
+    enableZshIntegration = false;
   };
 
   xdg.configFile."zellij/config.kdl".text = ''
