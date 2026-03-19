@@ -15,6 +15,7 @@
 	mako = "mako";
 	cava = "cava";
 	quickshell = "quickshell";
+	ghostty = "ghostty"; 
     };
  in 
 
