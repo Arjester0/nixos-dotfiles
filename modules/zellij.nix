@@ -8,8 +8,6 @@
   xdg.configFile."zellij/config.kdl".text = ''
     theme "blue-archive"
     default_layout "battlestation"
-    default_mode "normal" 
-    status_bar_position "bottom"
     pane_frames true
     mouse_mode false
     default_shell "zsh"
