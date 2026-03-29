@@ -44,7 +44,7 @@
         bind "Alt Space" { ToggleFocusFullscreen; }
         bind "Alt f" { ToggleFloatingPanes; }
         bind "Alt F" { TogglePaneEmbedOrFloating; }
-        bind "Alt g" { Run "zsh" { floating true; x "10%"; y "10%"; width "80%"; height "80%"; }; SwitchToMode "Normal"; }
+        bind "Alt g" { Run "nvim" "-c" ":enew" { floating true; x "5%"; y "5%"; width "90%"; height "90%"; }; SwitchToMode "Normal"; }
         bind "Alt t" { NewTab; }
         bind "Alt [" { GoToPreviousTab; }
         bind "Alt ]" { GoToNextTab; }

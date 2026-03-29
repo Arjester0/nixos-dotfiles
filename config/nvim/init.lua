@@ -228,6 +228,7 @@ require("lazy").setup({
     { "chomosuke/typst-preview.nvim" },
     { "neovim/nvim-lspconfig" },
     { "L3MON4D3/LuaSnip" },
+    { "direnv/direnv.vim" },
     {
       "mikavilpas/yazi.nvim",
       version = "*",
@@ -308,6 +309,13 @@ require("nvim-treesitter.configs").setup({
   indent = { enable = true },
 })
 
+vim.api.nvim_create_autocmd("User", {
+    pattern = "DirenvLoaded",
+    callback = function()
+	vim.cmd("LspRestart")
+    end,
+})
+
 -- LSP configuration
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("my.lsp", {}),
@@ -341,6 +349,16 @@ require("actions-preview").setup({
   )
 })
 
+vim.lsp.config.clangd = {
+  cmd = {
+    "clangd",
+    "--query-driver=/nix/store/**/clang++,/nix/store/**/clang",
+    "--header-insertion=never",
+  },
+  flags = {
+	debounce_text_changes = 100,
+  },
+}
 vim.lsp.enable({ 'clangd' })
 
 require("oil").setup({
