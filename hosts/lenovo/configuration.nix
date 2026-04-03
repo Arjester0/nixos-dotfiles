@@ -18,7 +18,7 @@
       efiSupport = true;
       device = "nodev";
       useOSProber = true;
-      theme = "/boot/grub/themes/yuuka/theme.txt";
+      theme = "/boot/grub/themes/yuuka";
   }; 
   boot.loader.efi.canTouchEfiVariables = true;
 
