@@ -27,7 +27,7 @@
     syntaxHighlighting.enable = true;
 
     sessionVariables = {
-      PATH = "$HOME/.cargo/bin:$PATH";
+      PATH = "$HOME/.cargo/bin:$HOME/.local/bin:$PATH";
       HYPRSHOT_DIR = "$HOME/Pictures/screenshots";
       EDITOR = "nvim";
     };
@@ -40,22 +40,27 @@
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#arjester";
       config = "cd ~/nixos-dotfiles/config";
       qs = "quickshot";
+      jai = "steam-run ~/.local/bin/jai";
     };
 
     history.size = 10000;
     history.ignoreAllDups = true;
     history.path = "$HOME/.zsh_history";
-    history.ignorePatterns = [ "rm *" "pkill *" "cp *" ];
+    history.ignorePatterns = [
+      "rm *"
+      "pkill *"
+      "cp *"
+    ];
 
     profileExtra = ''
       if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-        exec hyprland
+        exec start-hyprland
       fi
     '';
     initContent = ''
-     if [[ -z "$ZELLIJ" ]]; then
-	zellij attach -c
-     fi
+      if [[ -z "$ZELLIJ" ]]; then
+        zellij attach -c
+      fi
     '';
   };
 

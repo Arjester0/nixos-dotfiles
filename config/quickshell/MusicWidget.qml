@@ -13,9 +13,9 @@ FloatingWindow {
 
     WlrLayershell.layer: WlrLayer.Overlay
     WlrLayershell.anchors.bottom: true
-    WlrLayershell.anchors.left: true
+    WlrLayershell.anchors.right: true
     WlrLayershell.margins.bottom: 12
-    WlrLayershell.margins.left: 20
+    WlrLayershell.margins.right: 20
     WlrLayershell.exclusiveZone: 0
 
     // Player state

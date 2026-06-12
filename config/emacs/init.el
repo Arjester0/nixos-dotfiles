@@ -1,5 +1,5 @@
 (require 'package) 
-(add-to-list 'package-archives '("melpa" . "https://melps.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize) 
 
 (unless (package-installed-p 'use-package)
@@ -24,4 +24,3 @@
 (save-place-mode 1)
 (setq use-dialog-box nil) 
 (global-auto-revert-mode 1)
-

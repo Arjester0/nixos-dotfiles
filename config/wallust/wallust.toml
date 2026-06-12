@@ -1,0 +1,15 @@
+backend = "fastresize"
+color_space = "lch"
+palette = "dark16"
+check_contrast = true
+
+[templates]
+hypr = { template = 'colors-hyprland.conf', target = '~/nixos-dotfiles/config/hypr/wallust/wallust-hyprland.conf' }
+waybar = { template = 'colors-waybar.css', target = '~/nixos-dotfiles/config/waybar/wallust/colors-waybar.css' }
+rofi = { template = 'colors-rofi.rasi', target = '~/nixos-dotfiles/config/rofi/wallust/colors-rofi.rasi' }
+kitty = { template = 'colors-kitty.conf', target = '~/nixos-dotfiles/config/kitty/kitty-themes/01-Wallust.conf' }
+ghostty = { template = 'colors-ghostty', target = '~/nixos-dotfiles/config/ghostty/wallust/colors-ghostty' }
+mako = { template = 'colors-mako', target = '~/nixos-dotfiles/config/mako/config' }
+zellij = { template = 'zellij-config.kdl', target = '~/nixos-dotfiles/config/zellij/config.kdl' }
+cava = { template = 'colors-cava', target = '~/nixos-dotfiles/config/cava/config' }
+nvim = { template = 'colors-nvim.lua', target = '~/nixos-dotfiles/config/nvim/colors/wallust.lua' }

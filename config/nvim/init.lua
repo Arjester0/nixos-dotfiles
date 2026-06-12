@@ -16,6 +16,12 @@ vim.opt.completeopt = "menuone,noselect,popup"
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+vim.filetype.add({
+  extension = {
+    jai = "jai",
+  },
+})
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -36,186 +42,6 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
-    -- Theme
-    {
-      "rebelot/kanagawa.nvim",
-      priority = 1000,
-      config = function()
-        require("kanagawa").setup({
-          compile = true,
-          undercurl = true,
-          commentStyle = { italic = true },
-          functionStyle = { bold = true },
-          keywordStyle = { italic = true },
-          statementStyle = { bold = true },
-          typeStyle = { bold = true },
-          transparent = false,
-          terminalColors = true,
-          theme = "wave",
-          background = { dark = "wave" },
-
-          colors = {
-            palette = {
-              -- Base backgrounds — BA navy/black
-              sumiInk0  = "#00000A",
-              sumiInk1  = "#060612",
-              sumiInk2  = "#0A1020",
-              sumiInk3  = "#0D1B2A",  -- main bg
-              sumiInk4  = "#112236",
-              sumiInk5  = "#1A2F45",
-              sumiInk6  = "#1E3550",
-
-              -- Foreground
-              fujiWhite = "#C8D8F0",
-              oldWhite  = "#A8BEDE",
-
-              -- BA cyan — keywords, functions
-              crystalBlue = "#4DB8FF",
-              springBlue  = "#7FE7F5",
-              lightBlue   = "#A0D8EF",
-
-              -- BA lavender — types, special
-              springViolet1 = "#B8A0FF",
-              springViolet2 = "#9B85E8",
-              oniViolet     = "#B8A0FF",
-              oniViolet2    = "#9B85E8",
-
-              -- BA pink — errors, warnings
-              samuraiRed  = "#FF6B8A",
-              peachRed    = "#FF8FA6",
-              autumnRed   = "#CC4455",
-
-              -- BA teal — strings
-              springGreen = "#5DDBB0",
-              autumnGreen = "#3DBB90",
-
-              -- BA yellow — constants
-              carpYellow  = "#FFD485",
-              boatYellow1 = "#FFB84D",
-              boatYellow2 = "#FFA020",
-
-              -- Muted blues for comments/inactive
-              fujiGray    = "#4A6A8A",
-              dragonBlue  = "#6A9FBF",
-            },
-            theme = {
-              wave = {
-                ui = {
-                  bg            = "#00000A",
-                  bg_dim        = "#060612",
-                  bg_gutter     = "#0A1020",
-                  bg_m3         = "#0D1B2A",
-                  bg_m2         = "#112236",
-                  bg_m1         = "#1A2F45",
-                  bg_p1         = "#1E3550",
-                  bg_p2         = "#223860",
-                  fg            = "#C8D8F0",
-                  pmenu = {
-                    bg    = "#0D1B2A",
-                    bg_sel = "#1A2F45",
-                    fg    = "#C8D8F0",
-                    fg_sel = "#7FE7F5",
-                    sbar  = "#112236",
-                    thumb = "#2A5F8F",
-                  },
-                  float = {
-                    bg     = "#0D1B2A",
-                    bg_border = "#2A5F8F",
-                  },
-                },
-              },
-            },
-          },
-
-          overrides = function(colors)
-            local theme = colors.theme
-            return {
-              -- Transparent floating windows with BA border
-              NormalFloat  = { bg = "#0D1B2A" },
-              FloatBorder  = { fg = "#4DB8FF", bg = "#0D1B2A" },
-              FloatTitle   = { fg = "#7FE7F5", bold = true },
-
-              -- Telescope
-              TelescopeNormal         = { bg = "#0D1B2A" },
-              TelescopeBorder         = { fg = "#2A5F8F", bg = "#0D1B2A" },
-              TelescopePromptNormal   = { bg = "#112236" },
-              TelescopePromptBorder   = { fg = "#4DB8FF", bg = "#112236" },
-              TelescopePromptTitle    = { fg = "#7FE7F5", bold = true },
-              TelescopePreviewTitle   = { fg = "#B8A0FF", bold = true },
-              TelescopeResultsTitle   = { fg = "#5DDBB0", bold = true },
-              TelescopeSelection      = { bg = "#1A2F45", fg = "#7FE7F5" },
-              TelescopeMatching       = { fg = "#4DB8FF", bold = true },
-
-              -- Cursor line
-              CursorLine   = { bg = "#0D1B2A" },
-              CursorLineNr = { fg = "#7FE7F5", bold = true },
-
-              -- Line numbers
-              LineNr       = { fg = "#2A5F8F" },
-
-              -- Search
-              Search       = { bg = "#1A3A5A", fg = "#7FE7F5" },
-              IncSearch    = { bg = "#4DB8FF", fg = "#00000A" },
-
-              -- Diagnostics
-              DiagnosticError = { fg = "#FF6B8A" },
-              DiagnosticWarn  = { fg = "#FFD485" },
-              DiagnosticInfo  = { fg = "#4DB8FF" },
-              DiagnosticHint  = { fg = "#5DDBB0" },
-
-              -- LSP semantic tokens
-              ["@variable"]          = { fg = "#C8D8F0" },
-              ["@variable.builtin"]  = { fg = "#7FE7F5", italic = true },
-              ["@function"]          = { fg = "#4DB8FF", bold = true },
-              ["@function.builtin"]  = { fg = "#7FE7F5", bold = true },
-              ["@keyword"]           = { fg = "#B8A0FF", italic = true },
-              ["@keyword.return"]    = { fg = "#FF6B8A", italic = true },
-              ["@type"]              = { fg = "#7FE7F5", bold = true },
-              ["@type.builtin"]      = { fg = "#5DDBB0", bold = true },
-              ["@string"]            = { fg = "#5DDBB0" },
-              ["@comment"]           = { fg = "#4A6A8A", italic = true },
-              ["@constant"]          = { fg = "#FFD485" },
-              ["@constant.builtin"]  = { fg = "#FF8FA6" },
-              ["@operator"]          = { fg = "#7FE7F5" },
-              ["@punctuation"]       = { fg = "#6A8AAA" },
-              ["@parameter"]         = { fg = "#C8D8F0", italic = true },
-              ["@field"]             = { fg = "#A0D8EF" },
-              ["@property"]          = { fg = "#A0D8EF" },
-
-              -- Completion menu
-              Pmenu      = { bg = "#0D1B2A", fg = "#C8D8F0" },
-              PmenuSel   = { bg = "#1A2F45", fg = "#7FE7F5", bold = true },
-              PmenuSbar  = { bg = "#112236" },
-              PmenuThumb = { bg = "#2A5F8F" },
-
-              -- Statusline
-              StatusLine   = { bg = "#0D1B2A", fg = "#C8D8F0" },
-              StatusLineNC = { bg = "#060612", fg = "#4A6A8A" },
-
-              -- Tabline
-              TabLine      = { bg = "#060612", fg = "#4A6A8A" },
-              TabLineSel   = { bg = "#0D1B2A", fg = "#7FE7F5", bold = true },
-              TabLineFill  = { bg = "#00000A" },
-
-              -- Git signs (if you add gitsigns later)
-              GitSignsAdd    = { fg = "#5DDBB0" },
-              GitSignsChange = { fg = "#4DB8FF" },
-              GitSignsDelete = { fg = "#FF6B8A" },
-
-              -- Oil
-              OilDir       = { fg = "#4DB8FF", bold = true },
-              OilFile      = { fg = "#C8D8F0" },
-              OilPermRead  = { fg = "#5DDBB0" },
-              OilPermWrite = { fg = "#FFD485" },
-              OilPermExec  = { fg = "#FF6B8A" },
-            }
-          end,
-        })
-        vim.cmd("colorscheme kanagawa-wave")
-      end,
-    },
-
-    -- All your existing plugins unchanged
     { "nvim-telescope/telescope.nvim" },
     { "LinArcX/telescope-env.nvim" },
     { "nvim-telescope/telescope-ui-select.nvim" },
@@ -227,6 +53,7 @@ require("lazy").setup({
     { "nvim-lua/plenary.nvim" },
     { "chomosuke/typst-preview.nvim" },
     { "neovim/nvim-lspconfig" },
+    { "rluba/jai.vim" },
     { "L3MON4D3/LuaSnip" },
     { "direnv/direnv.vim" },
     {
@@ -265,11 +92,15 @@ require("lazy").setup({
       end,
     },
   },
-  install = { colorscheme = { "kanagawa-wave" } },
+  install = { colorscheme = { "wallust" } },
   checker = { enabled = true },
 })
 
--- Plugin configurations (all unchanged)
+local colorscheme_ok, colorscheme_error = pcall(vim.cmd.colorscheme, "wallust")
+if not colorscheme_ok then
+  vim.notify("Failed to load wallust colorscheme: " .. colorscheme_error, vim.log.levels.WARN)
+end
+
 require("marks").setup({
   builtin_marks = { "<", ">", "^" },
   refresh_interval = 250,
@@ -284,7 +115,7 @@ require("telescope").setup({
     color_devicons = true,
     sorting_strategy = "ascending",
     borderchars = { "", "", "", "", "", "", "", "" },
-    path_displays = "smart",
+    path_display = { "smart" },
     layout_strategy = "horizontal",
     layout_config = {
       height = 100,
@@ -303,17 +134,34 @@ require("telescope").setup({
 require("telescope").load_extension("env")
 require("telescope").load_extension("ui-select")
 
+local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+
+parser_config.jai = {
+  install_info = {
+    url = vim.fn.expand("~/.local/share/tree-sitter-jai"),
+    files = { "src/parser.c", "src/scanner.c" },
+  },
+  filetype = "jai",
+}
+
 require("nvim-treesitter.configs").setup({
   ensure_installed = { "lua", "vim", "vimdoc" },
-  highlight = { enable = true },
-  indent = { enable = true },
+
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+
+  indent = {
+    enable = true,
+  },
 })
 
 vim.api.nvim_create_autocmd("User", {
-    pattern = "DirenvLoaded",
-    callback = function()
-	vim.cmd("LspRestart")
-    end,
+  pattern = "DirenvLoaded",
+  callback = function()
+    vim.notify("direnv loaded", vim.log.levels.INFO)
+  end,
 })
 
 -- LSP configuration
@@ -342,7 +190,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 require("actions-preview").setup({
   backend = { "telescope" },
-  extensions = { "env" },
   telescope = vim.tbl_extend(
     "force",
     require("telescope.themes").get_dropdown(), {}
@@ -355,10 +202,19 @@ vim.lsp.config.clangd = {
     "--query-driver=/nix/store/**/clang++,/nix/store/**/clang",
     "--header-insertion=never",
   },
+  filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+  root_markers = {
+    "compile_commands.json",
+    "compile_flags.txt",
+    ".clangd",
+    ".git",
+  },
   flags = {
-	debounce_text_changes = 100,
+    debounce_text_changes = 100,
   },
 }
+
+vim.lsp.enable("clangd")
 vim.lsp.enable({ 'clangd' })
 
 require("oil").setup({
@@ -399,6 +255,13 @@ local ls = require("luasnip")
 local builtin = require("telescope.builtin")
 local map = vim.keymap.set
 
+-- Map jk to <Esc> in insert mode
+map('i', 'jk', '<Esc>', { noremap = true, silent = true })
+
+-- Optional: Map jk to <Esc> in visual/terminal mode
+map('v', 'jk', '<Esc>', { noremap = true, silent = true })
+map('t', 'jk', '<C-\\><C-n>', { noremap = true, silent = true })
+
 for i = 1, 8 do
   map({ "n", "t" }, "<Leader>" .. i, "<Cmd>tabnext " .. i .. "<CR>")
 end
@@ -435,3 +298,11 @@ map({ "n", "v", "x" }, "<leader>v", "<Cmd>edit $MYVIMRC<CR>", { desc = "Edit ini
 map("n", "<leader>w", "<Cmd>update<CR>", { desc = "Write the current buffer" })
 map("n", "<leader>q", "<Cmd>quit<CR>", { desc = "Quit the current buffer" })
 map("n", "<leader>mb", run_build, { desc = "Run build.sh" })
+
+-- window stuff
+map("n", "<leader>wv", "<Cmd>vsplit<CR>", { desc = "split veritcally" })
+map("n", "<leader>ws", "<Cmd>split<CR>", { desc = "split horizontally" })
+map("n", "<leader>wh", "<C-w>h", { desc = "window swap left" })
+map("n", "<leader>wj", "<C-w>j", { desc = "window swap down" })
+map("n", "<leader>wk", "<C-w>k", { desc = "window swap up" })
+map("n", "<leader>wl", "<C-w>l", { desc = "window swap right" })

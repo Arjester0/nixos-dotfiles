@@ -1,8 +1,8 @@
 # Wallust-generated retro notification style
 
-background-color=#F4F1BF
-text-color=#1F1617
-border-color=#ABA985
+background-color={{color15}}
+text-color={{background}}
+border-color={{color8}}
 
 padding=8
 border-size=2

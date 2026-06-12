@@ -3,68 +3,82 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 # test comment
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-    
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = false;
   boot.loader.grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
-      useOSProber = true;
-      theme = "/boot/grub/themes/yuuka";
-  }; 
+    enable = true;
+    efiSupport = true;
+    device = "nodev";
+    useOSProber = true;
+    theme = "/boot/grub/themes/yuuka";
+  };
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "arjester"; # Define your hostname.
   # Pick only one of the below networking options.
- # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
- networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
-  services.getty.autologinUser = "arjester"; 
+  services.getty.autologinUser = "arjester";
 
   programs.hyprland = {
     enable = true;
-    xwayland.enable = true; 
-  };  
+    xwayland.enable = true;
+  };
   programs.hyprlock.enable = true;
-  security.pam.services.hyprlock = {}; 
+  security.pam.services.hyprlock = { };
   services.hypridle.enable = true;
 
+  # TODO: deprecate this line 
+  # Changed to fish but keeping zsh here just in case 
   programs.zsh.enable = true;
-  users.users.arjester.shell = pkgs.zsh; 
+
+  programs.fish.enable = true;
+  users.users.arjester.shell = pkgs.fish;
 
   programs.steam = {
-      enable = true;
-      remotePlay.openFirewall = true;
-      dedicatedServer.openFirewall = true;
-      localNetworkGameTransfers.openFirewall = true;
-}; 
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
+
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
 
   nixpkgs.config.allowUnfree = true;
 
   fonts.packages = with pkgs; [
-      noto-fonts-cjk-sans
-      noto-fonts-cjk-serif
- ]; 
-    i18n.inputMethod = {
-      type = "fcitx5";
-      enable = true;
-      fcitx5.addons = with pkgs; [
-	fcitx5-mozc
-	fcitx5-gtk
-      ];
-    };
- # Configure network proxy if necessary
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+  ];
+  i18n.inputMethod = {
+    type = "fcitx5";
+    enable = true;
+    fcitx5.addons = with pkgs; [
+      fcitx5-mozc
+      fcitx5-gtk
+    ];
+  };
+  # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
@@ -81,12 +95,12 @@
   # services.xserver = {
   #  enable = true;
   #  windowManager.qtile.enable = true;
-  # };  
+  # };
 
   # Graphics (hardware.opengl is deprecated, use hardware.graphics instead)
-  hardware.graphics.enable = true; 
+  hardware.graphics.enable = true;
 
-  # Bluetooth 
+  # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
@@ -100,7 +114,7 @@
   # Enable sound.
   # services.pulseaudio.enable = true;
   # OR
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -111,64 +125,69 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-# Define a user account. Don't forget to set a password with ‘passwd’.
- users.users.arjester = {
-   isNormalUser = true;
-   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-   packages = with pkgs; [
-     tree
-   ];
- };
+  # Define a user account. Don't forget to set a password with ‘passwd’.
+  users.users.arjester = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    packages = with pkgs; [
+      tree
+    ];
+  };
 
   programs.firefox.enable = true;
+  programs.nix-ld.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
- environment.systemPackages = with pkgs; [
-   vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-   wget
-   kitty 
-   ghostty
-   btop
-   brave 
-   git 
-   tmux 
-   helix
-   waybar
-   hyprpaper
-   nwg-displays 
-   wallust
-   fastfetch
-   zathura
-   cava
-   cargo 
-   rustc
-   jetbrains.idea-community-bin
-   jujutsu 
-   hyprcursor
-   gh
-   gdb
-   hyprshot
-   hyprlock
-   hypridle
-   mako
-   libnotify
-   pavucontrol
-   pamixer
-   yazi
-   quickshell
-   glfw
-   mesa
-   libGL
-   pkg-config
-   unzip
-   clang-tools
-   clang
-   tesseract
-   emacs
- ];
+  environment.systemPackages = with pkgs; [
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    ghostty
+    btop
+    brave
+    git
+    tmux
+    helix
+    waybar
+    hyprpaper
+    nwg-displays
+    wallust
+    fastfetch
+    zathura
+    cava
+    cargo
+    rustc
+    jujutsu
+    hyprcursor
+    gh
+    gdb
+    hyprshot
+    hyprlock
+    hypridle
+    mako
+    libnotify
+    pavucontrol
+    pamixer
+    yazi
+    quickshell
+    glfw
+    mesa
+    libGL
+    pkg-config
+    unzip
+    clang-tools
+    clang
+    tesseract
+    syncthing
+    codex
+    obsidian
+    fish
+  ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -211,6 +230,4 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
-
 }
-

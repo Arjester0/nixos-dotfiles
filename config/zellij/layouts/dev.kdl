@@ -1,0 +1,21 @@
+layout {
+  default_tab_template {
+    pane size=1 borderless=true {
+      plugin location="zellij:tab-bar"
+    }
+    children
+    pane size=1 borderless=true {
+      plugin location="zellij:status-bar"
+    }
+  }
+
+  tab name="編集" focus=true {
+    pane split_direction="vertical" {
+      pane name="編集" size="68%" focus=true
+      pane split_direction="horizontal" size="32%" {
+        pane name="実行" size="55%"
+        pane name="管理" size="45%"
+      }
+    }
+  }
+}
