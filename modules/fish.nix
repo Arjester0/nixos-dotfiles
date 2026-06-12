@@ -1,7 +1,9 @@
+{ ... }:
+
 {
   programs.starship = {
     enable = true;
-    enableZshIntegration = true;
+    enableFishIntegration = true;
     settings = {
       add_newline = false;
       character = {
@@ -20,17 +22,9 @@
     };
   };
 
-  programs.zsh = {
+  programs.fish = {
     enable = true;
-    enableCompletion = true;
-    autosuggestion.enable = true;
-    syntaxHighlighting.enable = true;
-
-    sessionVariables = {
-      PATH = "$HOME/.cargo/bin:$HOME/.local/bin:$PATH";
-      HYPRSHOT_DIR = "$HOME/Pictures/screenshots";
-      EDITOR = "nvim";
-    };
+    generateCompletions = true;
 
     shellAliases = {
       ll = "eza -la";
@@ -43,26 +37,22 @@
       jai = "steam-run ~/.local/bin/jai";
     };
 
-    history.size = 10000;
-    history.ignoreAllDups = true;
-    history.path = "$HOME/.zsh_history";
-    history.ignorePatterns = [
-      "rm *"
-      "pkill *"
-      "cp *"
-    ];
-
-    profileExtra = ''
-      if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-        exec start-hyprland
-      fi
+    shellInit = ''
+      set -gx HYPRSHOT_DIR "$HOME/Pictures/screenshots"
+      set -gx EDITOR nvim
+      fish_add_path -g "$HOME/.cargo/bin" "$HOME/.local/bin"
+      set -g fish_greeting
     '';
-    initContent = ''
-      if [[ -z "$ZELLIJ" ]]; then
-        zellij attach -c
-      fi
+
+    loginShellInit = ''
+      if test -z "$WAYLAND_DISPLAY"; and test "$XDG_VTNR" = 1
+        exec start-hyprland
+      end
     '';
   };
 
-  programs.fzf.enable = true;
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 }

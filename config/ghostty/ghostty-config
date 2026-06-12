@@ -50,11 +50,10 @@ resize-overlay = never
 mouse-hide-while-typing = true
 
 # Shell integration
-shell-integration = zsh
+shell-integration = detect
 shell-integration-features = cursor,sudo,title
 
 # Misc
 confirm-close-surface = false
 copy-on-select = false
 scrollback-limit = 10000
-EOF

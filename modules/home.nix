@@ -25,7 +25,7 @@ in
 
 {
   imports = [
-    ./zsh.nix
+    ./fish.nix
     ./cursor.nix
     ./direnv.nix
     ./zellij.nix
@@ -44,7 +44,7 @@ in
   programs.git.enable = true;
   programs.zoxide = {
     enable = true;
-    enableZshIntegration = true;
+    enableFishIntegration = true;
   };
 
   xdg.configFile = builtins.mapAttrs (name: subpath: {

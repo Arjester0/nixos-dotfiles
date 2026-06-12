@@ -2,7 +2,7 @@ theme "wallust-retro"
 default_layout "dev"
 pane_frames true
 mouse_mode true
-default_shell "zsh"
+default_shell "fish"
 on_force_close "detach"
 copy_on_select false
 simplified_ui true

@@ -6,7 +6,9 @@ in
 {
   programs.zellij = {
     enable = true;
-    enableZshIntegration = false;
+    enableFishIntegration = true;
+    attachExistingSession = true;
+    exitShellOnExit = false;
   };
 
   xdg.configFile."zellij/config.kdl" = {

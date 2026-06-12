@@ -45,12 +45,7 @@
   security.pam.services.hyprlock = { };
   services.hypridle.enable = true;
 
-  # TODO: deprecate this line 
-  # Changed to fish but keeping zsh here just in case 
-  programs.zsh.enable = true;
-
   programs.fish.enable = true;
-  users.users.arjester.shell = pkgs.fish;
 
   programs.steam = {
     enable = true;
@@ -128,6 +123,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.arjester = {
     isNormalUser = true;
+    shell = pkgs.fish;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
