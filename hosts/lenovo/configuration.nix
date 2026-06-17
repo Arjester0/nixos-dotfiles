@@ -178,6 +178,7 @@
     codex
     obsidian
     fish
+    wireshark
   ];
 
   nix.settings.experimental-features = [
