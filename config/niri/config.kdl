@@ -1,0 +1,122 @@
+spawn-at-startup "bash" "-lc" "$HOME/nixos-dotfiles/config/scripts/start-swaybg.sh"
+spawn-at-startup "waybar"
+spawn-at-startup "mako"
+spawn-at-startup "xwayland-satellite"
+spawn-at-startup "fcitx5" "-d"
+
+environment {
+    GTK_THEME "adw-gtk3-dark"
+    GTK_ICON_THEME "Papirus-Dark"
+    QT_QPA_PLATFORMTHEME "qt5ct"
+    QT_STYLE_OVERRIDE "adwaita-dark"
+    XCURSOR_SIZE "24"
+    XDG_CURRENT_DESKTOP "niri"
+    XDG_SESSION_TYPE "wayland"
+}
+
+prefer-no-csd
+
+output "eDP-1" {
+    scale 1.5
+}
+
+output "HDMI-A-1" {
+    scale 1.67
+}
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+        repeat-delay 200
+        repeat-rate 35
+    }
+
+    touchpad {
+        tap
+    }
+
+    mouse {
+        accel-speed 0.0
+    }
+}
+
+layout {
+    gaps 0
+
+    focus-ring {
+        width 2
+        active-color "#7fe7f5"
+        inactive-color "#2a3240"
+    }
+
+    border {
+        off
+    }
+}
+
+binds {
+    Mod+Return { spawn "ghostty"; }
+    Mod+Q { close-window; }
+    Mod+M { quit; }
+    Mod+E { spawn "kitty" "-e" "yazi"; }
+    Mod+V { toggle-window-floating; }
+    Mod+D { spawn "rofi" "-show" "drun"; }
+    Mod+B { spawn "brave"; }
+    Mod+W { spawn "bash" "-lc" "$HOME/nixos-dotfiles/config/scripts/wallpaper.sh"; }
+    Mod+R { spawn "bash" "-lc" "pkill waybar; waybar &"; }
+    Mod+S { screenshot; }
+    Mod+O { spawn "quickshell" "--no-duplicate" "--path" "/home/arjester/nixos-dotfiles/config/quickshell/session-screen"; }
+    Mod+T { toggle-column-tabbed-display; }
+    Mod+F { maximize-column; }
+    Mod+Shift+F { fullscreen-window; }
+
+    Mod+H { focus-column-left; }
+    Mod+L { focus-column-right; }
+    Mod+K { focus-window-up; }
+    Mod+J { focus-window-down; }
+
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+L { move-column-right; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+J { move-window-down; }
+
+    Mod+Alt+H { set-column-width "-10%"; }
+    Mod+Alt+L { set-column-width "+10%"; }
+    Mod+Alt+K { set-window-height "-10%"; }
+    Mod+Alt+J { set-window-height "+10%"; }
+
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+0 { focus-workspace 10; }
+
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+    Mod+Shift+5 { move-column-to-workspace 5; }
+    Mod+Shift+6 { move-column-to-workspace 6; }
+    Mod+Shift+7 { move-column-to-workspace 7; }
+    Mod+Shift+8 { move-column-to-workspace 8; }
+    Mod+Shift+9 { move-column-to-workspace 9; }
+    Mod+Shift+0 { move-column-to-workspace 10; }
+
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn "bash" "-lc" "pamixer -i 5 && notify-send -h int:value:$(pamixer --get-volume) 'Volume' \"$(pamixer --get-volume)%\""; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn "bash" "-lc" "pamixer -d 5 && notify-send -h int:value:$(pamixer --get-volume) 'Volume' \"$(pamixer --get-volume)%\""; }
+    XF86AudioMute allow-when-locked=true { spawn "bash" "-lc" "pamixer -t && notify-send 'Volume' \"$([ $(pamixer --get-mute) = true ] && echo Muted || echo $(pamixer --get-volume)%)\""; }
+    XF86AudioMicMute allow-when-locked=true { spawn "bash" "-lc" "pamixer --default-source -t && notify-send 'Mic' \"$([ $(pamixer --default-source --get-mute) = true ] && echo Muted || echo Live)\""; }
+
+    XF86MonBrightnessUp allow-when-locked=true { spawn "bash" "-lc" "brightnessctl set 5%+ && notify-send -h int:value:$(brightnessctl get) 'Brightness' \"$(brightnessctl get)%\""; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "bash" "-lc" "brightnessctl set 5%- && notify-send -h int:value:$(brightnessctl get) 'Brightness' \"$(brightnessctl get)%\""; }
+}

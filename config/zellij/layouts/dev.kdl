@@ -9,12 +9,12 @@ layout {
     }
   }
 
-  tab name="編集" focus=true {
+  tab name="Code 星" focus=true {
     pane split_direction="vertical" {
-      pane name="編集" size="68%" focus=true
+      pane name="Editor" size="68%" focus=true
       pane split_direction="horizontal" size="32%" {
-        pane name="実行" size="55%"
-        pane name="管理" size="45%"
+        pane name="Run" size="55%"
+        pane name="Ops" size="45%"
       }
     }
   }

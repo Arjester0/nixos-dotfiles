@@ -5,7 +5,7 @@ vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.relativenumber = true
 vim.opt.shiftwidth = 4
-vim.opt.winborder = "rounded"
+vim.opt.winborder = "single"
 vim.opt.smartindent = true
 vim.opt.wrap = false
 vim.opt.ignorecase = true
@@ -145,7 +145,7 @@ parser_config.jai = {
 }
 
 require("nvim-treesitter.configs").setup({
-  ensure_installed = { "lua", "vim", "vimdoc" },
+  ensure_installed = { "lua", "vim", "vimdoc", "rust", "toml", },
 
   highlight = {
     enable = true,
@@ -165,6 +165,7 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 -- LSP configuration
+local builtin = require("telescope.builtin")
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("my.lsp", {}),
   callback = function(args)
@@ -185,6 +186,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, vim.tbl_extend('force', opts, { desc = "Go to declaration" }))
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, vim.tbl_extend('force', opts, { desc = "Hover documentation" }))
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, vim.tbl_extend('force', opts, { desc = "Rename symbol" }))
+    vim.keymap.set("n", "gr", builtin.lsp_references,
+      vim.tbl_extend("force", opts, { desc = "References" }))
+
+    vim.keymap.set("n", "gi", builtin.lsp_implementations,
+      vim.tbl_extend("force", opts, { desc = "Implementations" }))
+
+    vim.keymap.set("n", "gy", builtin.lsp_type_definitions,
+      vim.tbl_extend("force", opts, { desc = "Type definition" }))
+
+    vim.keymap.set("n", "<leader>ca", require("actions-preview").code_actions,
+      vim.tbl_extend("force", opts, { desc = "Code actions" }))
+
+    vim.keymap.set("n", "<leader>lf", function()
+      vim.lsp.buf.format({ async = true })
+    end, vim.tbl_extend("force", opts, { desc = "Format buffer" }))
   end,
 })
 
@@ -217,6 +233,48 @@ vim.lsp.config.clangd = {
 vim.lsp.enable("clangd")
 vim.lsp.enable({ 'clangd' })
 
+vim.lsp.config.rust_analyzer = {
+  cmd = { "rust-analyzer" },
+  filetypes = { "rust" },
+
+  root_markers = {
+    "Cargo.toml",
+    "Cargo.lock",
+    "rust-project.json",
+    ".git",
+  },
+
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        allTargets = true,
+        features = "all",
+        buildScripts = {
+          enable = true,
+        },
+      },
+
+      procMacro = {
+        enable = true,
+      },
+
+      check = {
+        command = "clippy",
+      },
+
+      completion = {
+        fullFunctionSignatures = {
+          enable = true,
+        },
+      },
+    },
+  },
+}
+
+vim.lsp.enable("rust_analyzer")
+
+require("lspconfig").hls.setup({}) 
+
 require("oil").setup({
   lsp_file_methods = {
     enabled = true,
@@ -230,7 +288,7 @@ require("oil").setup({
   float = {
     max_width = 0.7,
     max_height = 0.6,
-    border = "rounded",
+    border = "single",
   },
 })
 
@@ -252,7 +310,6 @@ end
 
 -- Keymaps (all unchanged)
 local ls = require("luasnip")
-local builtin = require("telescope.builtin")
 local map = vim.keymap.set
 
 -- Map jk to <Esc> in insert mode

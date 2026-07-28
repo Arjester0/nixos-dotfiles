@@ -1,110 +1,98 @@
-/* Blue Archive / Hayase Yuuka, early-2000s Linux launcher. */
+/* Wallust cyber launcher with Suisei/vocaloid accent language. */
 
 @import "~/.config/rofi/wallust/colors-rofi.rasi"
 
 * {
-    bg: @color15;
-    fg: @background;
-    light: @color7;
-    shadow: @color8;
+    bg: @background;
+    surface: @color0;
+    fg: @foreground;
+    muted: @color8;
     accent: @color12;
-    accent2: @color13;
-    edge: @color4;
+    accent2: @color14;
+    urgent: @color1;
 
     background-color: transparent;
     text-color: @fg;
-    font: "Noto Sans CJK JP Bold 12";
+    font: "JetBrainsMono Nerd Font Bold 12";
 }
 
 window {
     background-color: @bg;
-    border: 2px solid;
-    border-color: @shadow;
-    border-radius: 0;
-    width: 520px;
-    padding: 3px;
+    border: 1px solid;
+    border-color: @accent;
+    border-radius: 8px;
+    width: 620px;
+    padding: 10px;
     location: center;
 }
 
 mainbox {
-    background-color: @bg;
-    border: 1px solid;
-    border-color: @light;
+    background-color: transparent;
     children: [ inputbar, listview ];
-    spacing: 3px;
+    spacing: 10px;
 }
 
 inputbar {
-    background-color: @accent;
+    background-color: @surface;
     border: 1px solid;
-    border-color: @shadow;
-    padding: 5px 7px;
-    spacing: 6px;
+    border-color: @accent;
+    border-radius: 6px;
+    padding: 8px 10px;
+    spacing: 8px;
     children: [ prompt, entry ];
 }
 
 prompt {
-    text-color: @fg;
+    text-color: @accent2;
 }
 
 entry {
-    background-color: @light;
+    background-color: transparent;
     text-color: @fg;
-    border: 1px solid;
-    border-color: @shadow;
-    padding: 2px 5px;
-    placeholder: "コマンド入力...";
-    placeholder-color: @shadow;
+    placeholder: "Search / 検索...";
+    placeholder-color: @muted;
     cursor: text;
 }
 
 listview {
-    background-color: @light;
-    border: 1px solid;
-    border-color: @shadow;
-    padding: 3px;
-    spacing: 1px;
+    background-color: transparent;
+    padding: 0;
+    spacing: 5px;
     lines: 10;
     columns: 1;
-    scrollbar: true;
+    scrollbar: false;
 }
 
 element {
-    background-color: @light;
+    background-color: transparent;
     text-color: @fg;
-    padding: 4px 6px;
-    border-radius: 0;
-    spacing: 8px;
+    padding: 8px 10px;
+    border: 1px solid;
+    border-color: transparent;
+    border-radius: 6px;
+    spacing: 10px;
     children: [ element-icon, element-text ];
 }
 
 element selected.normal {
-    background-color: @accent;
-    text-color: @fg;
-    border: 1px solid;
-    border-color: @edge;
+    background-color: @surface;
+    text-color: @accent2;
+    border-color: @accent;
 }
 
 element normal.urgent,
 element selected.urgent {
-    background-color: @accent2;
-    text-color: @fg;
+    background-color: @urgent;
+    text-color: @bg;
+    border-color: @urgent;
 }
 
 element-icon {
-    size: 20px;
+    size: 22px;
     background-color: transparent;
 }
 
 element-text {
     background-color: transparent;
     text-color: inherit;
-}
-
-scrollbar {
-    background-color: @bg;
-    handle-color: @shadow;
-    handle-width: 8px;
-    border: 1px solid;
-    border-color: @shadow;
 }

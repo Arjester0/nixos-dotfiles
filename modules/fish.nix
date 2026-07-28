@@ -38,7 +38,6 @@
     };
 
     shellInit = ''
-      set -gx HYPRSHOT_DIR "$HOME/Pictures/screenshots"
       set -gx EDITOR nvim
       fish_add_path -g "$HOME/.cargo/bin" "$HOME/.local/bin"
       set -g fish_greeting
@@ -46,7 +45,7 @@
 
     loginShellInit = ''
       if test -z "$WAYLAND_DISPLAY"; and test "$XDG_VTNR" = 1
-        exec start-hyprland
+        exec niri-session
       end
     '';
   };

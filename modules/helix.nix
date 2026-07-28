@@ -6,7 +6,7 @@
     defaultEditor = false;  # keep nvim as default, hx to launch helix
 
     settings = {
-      theme = "gruvbox";
+      theme = "wallust";
 
       editor = {
         auto-completion = true;
@@ -46,18 +46,12 @@
         };
       };
 
-      # Make w/e/b collapse selection after moving (more vim-like)
-      keys.normal = {
-        w = [ "move_next_word_start" "collapse_selection" ];
-        e = [ "move_next_word_end" "collapse_selection" ];
-        b = [ "move_prev_word_start" "collapse_selection" ];
-        W = [ "move_next_long_word_start" "collapse_selection" ];
-        E = [ "move_next_long_word_end" "collapse_selection" ];
-        B = [ "move_prev_long_word_start" "collapse_selection" ];
-      };
-
       keys.insert = {
         esc = [ "collapse_selection" "normal_mode" ];
+
+	j = {
+	    k = [ "collapse_selection" "normal_mode" ];
+	};
       };
     };
 

@@ -16,15 +16,11 @@
     ./hardware-configuration.nix
   ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = false;
-  boot.loader.grub = {
+  boot.loader.systemd-boot = {
     enable = true;
-    efiSupport = true;
-    device = "nodev";
-    useOSProber = true;
-    theme = "/boot/grub/themes/yuuka";
+    configurationLimit = 10;
   };
+  boot.loader.grub.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "arjester"; # Define your hostname.
@@ -37,13 +33,9 @@
 
   services.getty.autologinUser = "arjester";
 
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
-  programs.hyprlock.enable = true;
-  security.pam.services.hyprlock = { };
-  services.hypridle.enable = true;
+  programs.niri.enable = true;
+  programs.xwayland.enable = true;
+  security.pam.services.quickshell = { };
 
   programs.fish.enable = true;
 
@@ -62,8 +54,12 @@
   nixpkgs.config.allowUnfree = true;
 
   fonts.packages = with pkgs; [
+    inter
+    noto-fonts
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
+    noto-fonts-color-emoji
+    nerd-fonts.jetbrains-mono
   ];
   i18n.inputMethod = {
     type = "fcitx5";
@@ -95,6 +91,25 @@
   # Graphics (hardware.opengl is deprecated, use hardware.graphics instead)
   hardware.graphics.enable = true;
 
+  # Use NVIDIA's proprietary userspace and kernel driver
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+
+    # RTX 4050 supports NVIDIA's open kernel module.
+    open = true;
+
+    nvidiaSettings = true;
+
+    # Keep power management simple initially.
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+  };
+
+  # Prevent the broken Nouveau driver from loading.
+  boot.blacklistedKernelModules = [ "nouveau" ];
+
   # Bluetooth
   hardware.bluetooth.enable = true;
   hardware.bluetooth.powerOnBoot = true;
@@ -124,7 +139,10 @@
   users.users.arjester = {
     isNormalUser = true;
     shell = pkgs.fish;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel"
+      "wireshark"
+    ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
     ];
@@ -145,8 +163,8 @@
     tmux
     helix
     waybar
-    hyprpaper
-    nwg-displays
+    swaybg
+    xwayland-satellite
     wallust
     fastfetch
     zathura
@@ -154,16 +172,13 @@
     cargo
     rustc
     jujutsu
-    hyprcursor
     gh
     gdb
-    hyprshot
-    hyprlock
-    hypridle
     mako
     libnotify
     pavucontrol
     pamixer
+    brightnessctl
     yazi
     quickshell
     glfw
@@ -178,8 +193,24 @@
     codex
     obsidian
     fish
-    wireshark
+    emacs
+    proton-vpn
+    cmake
+    gcc
+    libtool
+    libvterm
+    nil
+    nixfmt-rfc-style
+    rust-analyzer
+    rustfmt
+    clippy
   ];
+
+  programs.wireshark = {
+    enable = true;
+    dumpcap.enable = true; # default, but explicit is fine
+    package = pkgs.wireshark; # for gui, for cli change to pkgs.wireshark-cli
+  };
 
   nix.settings.experimental-features = [
     "nix-command"

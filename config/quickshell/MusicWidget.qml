@@ -7,8 +7,8 @@ import QtQuick.Layouts
 FloatingWindow {
     id: root
     visible: true
-    width: 680
-    height: 260
+    implicitWidth: 680
+    implicitHeight: 260
     color: "transparent"
 
     WlrLayershell.layer: WlrLayer.Overlay
@@ -99,10 +99,10 @@ FloatingWindow {
         }
     }
 
-    // Background pill — semi-transparent navy
+    // Cyber panel
     Rectangle {
         anchors.fill: parent
-        radius: 16
+        radius: 8
         color: "#0D1B2ADD"
         border.color: "#4DB8FF33"
         border.width: 1

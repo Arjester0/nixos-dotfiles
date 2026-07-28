@@ -1,11 +1,11 @@
-# Wallust-generated retro notification style
+# Wallust-generated cyber notification style
 
-background-color={{color15}}
-text-color={{background}}
-border-color={{color8}}
+background-color={{background}}
+text-color={{foreground}}
+border-color={{color12}}
 
-padding=8
-border-size=2
-border-radius=0
-font=Noto Sans CJK JP 10
+padding=10
+border-size=1
+border-radius=6
+font=JetBrainsMono Nerd Font 10
 default-timeout=5000

@@ -1,4 +1,4 @@
-theme "wallust-retro"
+theme "wallust-suisei"
 default_layout "dev"
 pane_frames true
 mouse_mode true
@@ -9,18 +9,18 @@ simplified_ui true
 hide_session_name false
 
 themes {
-  wallust-retro {
-    fg      "#FDFBD8"
-    bg      "#1F1617"
-    black   "#4D4041"
-    red     "#B05D8E"
-    green   "#957A5D"
-    yellow  "#CC4055"
-    blue    "#887EA1"
-    magenta "#B79587"
-    cyan    "#BCB76B"
-    white   "#F4F1BF"
-    orange  "#FC2243"
+  wallust-suisei {
+    fg      "#D7FFFF"
+    bg      "#1B1821"
+    black   "#46434F"
+    red     "#A3578A"
+    green   "#947A70"
+    yellow  "#7785B1"
+    blue    "#B08952"
+    magenta "#B2959C"
+    cyan    "#6ABFBF"
+    white   "#BEF7F7"
+    orange  "#8097DB"
   }
 }
 
@@ -54,9 +54,9 @@ keybinds clear-defaults=true {
     bind "Alt u" { HalfPageScrollUp; }
     bind "Alt e" { HalfPageScrollDown; }
 
-    bind "Alt o" { Run "nvim" "/home/arjester/Downloads/Notes/todo.txt" { name "メモ"; floating true; x "15%"; y "10%"; width "70%"; height "80%"; }; SwitchToMode "Normal"; }
-    bind "Alt g" { Run "lazygit" { name "管理"; floating true; x "5%"; y "5%"; width "90%"; height "90%"; }; SwitchToMode "Normal"; }
-    bind "Alt ?" { Run "nvim" "/home/arjester/nixos-dotfiles/config/keybinds.txt" { name "キー"; floating true; x "5%"; y "5%"; width "90%"; height "90%"; }; SwitchToMode "Normal"; }
+    bind "Alt o" { Run "nvim" "/home/arjester/Downloads/Notes/todo.txt" { name "Notes メモ"; floating true; x "15%"; y "10%"; width "70%"; height "80%"; }; SwitchToMode "Normal"; }
+    bind "Alt g" { Run "lazygit" { name "Git 管理"; floating true; x "5%"; y "5%"; width "90%"; height "90%"; }; SwitchToMode "Normal"; }
+    bind "Alt ?" { Run "nvim" "/home/arjester/nixos-dotfiles/config/keybinds.txt" { name "Keys キー"; floating true; x "5%"; y "5%"; width "90%"; height "90%"; }; SwitchToMode "Normal"; }
     bind "Alt Shift l" { SwitchToMode "Locked"; }
   }
 
