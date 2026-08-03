@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.starship = {
@@ -22,33 +22,27 @@
     };
   };
 
-  programs.fish = {
-    enable = true;
-    generateCompletions = true;
+programs.fish = {
+  enable = true;
+  generateCompletions = true;
 
-    shellAliases = {
-      ll = "eza -la";
-      ls = "eza";
-      cat = "bat";
-      vi = "nvim";
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#arjester";
-      config = "cd ~/nixos-dotfiles/config";
-      qs = "quickshot";
-      jai = "steam-run ~/.local/bin/jai";
-    };
-
-    shellInit = ''
-      set -gx EDITOR nvim
-      fish_add_path -g "$HOME/.cargo/bin" "$HOME/.local/bin"
-      set -g fish_greeting
-    '';
-
-    loginShellInit = ''
-      if test -z "$WAYLAND_DISPLAY"; and test "$XDG_VTNR" = 1
-        exec niri-session
-      end
-    '';
+  shellAliases = {
+    ll = "eza -la";
+    ls = "eza";
+    cat = "bat";
+    vi = "nvim";
+    nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#arjester";
+    config = "cd ~/nixos-dotfiles/config";
+    qs = "quickshot";
+    jai = "steam-run ~/.local/bin/jai";
   };
+
+  shellInit = ''
+    set -gx EDITOR nvim
+    fish_add_path -g "$HOME/.cargo/bin" "$HOME/.local/bin"
+    set -g fish_greeting
+  '';
+};
 
   programs.fzf = {
     enable = true;

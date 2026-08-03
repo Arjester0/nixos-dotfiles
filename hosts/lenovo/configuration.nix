@@ -31,11 +31,53 @@
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
-  services.getty.autologinUser = "arjester";
+services.greetd = {
+  enable = true;
 
+  settings.initial_session = {
+    command = "${config.programs.niri.package}/bin/niri-session";
+    user = "arjester";
+  };
+
+  settings.default_session = {
+    command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd ${config.programs.niri.package}/bin/niri-session";
+    user = "greeter";
+  };
+};
   programs.niri.enable = true;
   programs.xwayland.enable = true;
-  security.pam.services.quickshell = { };
+    # Quiet graphical boot
+    boot.plymouth.enable = true;
+    boot.initrd.verbose = false;
+    boot.consoleLogLevel = 3;
+
+    boot.kernelParams = [
+      "quiet"
+      "loglevel=3"
+      "udev.log_level=3"
+      "rd.systemd.show_status=auto"
+      "systemd.show_status=auto"
+    ];
+
+    # Graphical file chooser and desktop portals
+    xdg.portal = {
+      enable = true;
+
+      extraPortals = with pkgs; [
+	xdg-desktop-portal-gtk
+      ];
+
+      config.niri = {
+	default = [ "gnome" "gtk" ];
+
+	# Force the reliable GTK graphical file picker rather than
+	# the GNOME portal trying to delegate to Nautilus.
+	"org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+      };
+    };
+
+    # The locker uses PAM for password authentication
+    security.pam.services.swaylock = { };
 
   programs.fish.enable = true;
 
@@ -204,6 +246,9 @@
     rust-analyzer
     rustfmt
     clippy
+    swaylock
+    xdg-desktop-portal-gtk
+    nautilus
   ];
 
   programs.wireshark = {

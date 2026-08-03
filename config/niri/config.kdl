@@ -1,3 +1,4 @@
+spawn-at-startup "swaylock" "-f"
 spawn-at-startup "bash" "-lc" "$HOME/nixos-dotfiles/config/scripts/start-swaybg.sh"
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
@@ -67,7 +68,6 @@ binds {
     Mod+W { spawn "bash" "-lc" "$HOME/nixos-dotfiles/config/scripts/wallpaper.sh"; }
     Mod+R { spawn "bash" "-lc" "pkill waybar; waybar &"; }
     Mod+S { screenshot; }
-    Mod+O { spawn "quickshell" "--no-duplicate" "--path" "/home/arjester/nixos-dotfiles/config/quickshell/session-screen"; }
     Mod+T { toggle-column-tabbed-display; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
@@ -108,6 +108,9 @@ binds {
     Mod+Shift+8 { move-column-to-workspace 8; }
     Mod+Shift+9 { move-column-to-workspace 9; }
     Mod+Shift+0 { move-column-to-workspace 10; }
+
+    // for being able to not turn monitor off before bed
+    Mod+Shift+P { spawn "swaylock" "-c" "000000" "--no-unlock-indicator"; }
 
     Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
     Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
