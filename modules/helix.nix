@@ -3,16 +3,24 @@
 {
   programs.helix = {
     enable = true;
-    defaultEditor = false;  # keep nvim as default, hx to launch helix
+    defaultEditor = true;
 
     settings = {
       theme = "wallust";
 
       editor = {
+        shell = [
+          "nu"
+          "--commands"
+        ];
+
         auto-completion = true;
+        cursorline = true;
+        true-color = true;
+        auto-format = true;
         bufferline = "multiple";
         completion-trigger-len = 2;
-        line-number = "absolute";
+        line-number = "relative";
         mouse = false;
         color-modes = true;
 
@@ -22,6 +30,11 @@
           insert = "bar";
           normal = "block";
           select = "underline";
+        };
+
+        indent-guides = {
+          render = true;
+          character = "| ";
         };
 
         file-picker.hidden = false;
@@ -36,9 +49,18 @@
         soft-wrap.enable = true;
 
         statusline = {
-          left = [ "mode" "spinner" ];
+          left = [
+            "mode"
+            "spinner"
+          ];
           center = [ "file-name" ];
-          right = [ "diagnostics" "selections" "position" "file-encoding" "file-type" ];
+          right = [
+            "diagnostics"
+            "selections"
+            "position"
+            "file-encoding"
+            "file-type"
+          ];
           separator = "│";
           mode.normal = "NORMAL";
           mode.insert = "INSERT";
@@ -47,20 +69,36 @@
       };
 
       keys.insert = {
-        esc = [ "collapse_selection" "normal_mode" ];
+        esc = [
+          "collapse_selection"
+          "normal_mode"
+        ];
 
-	j = {
-	    k = [ "collapse_selection" "normal_mode" ];
-	};
+        normal = {
+          D = "extend_to_line_end";
+          C-s = ":write";
+        };
+
+        select = {
+          D = "extend_to_line_end";
+        };
+
+        j = {
+          k = [
+            "collapse_selection"
+            "normal_mode"
+          ];
+        };
       };
     };
 
     languages = {
       language-server = {
-        nixd = {
-          command = "nixd";
+        nil = {
+          command = "nil";
         };
         rust-analyzer = {
+          config.cargo.features = "all";
           config.check.command = "clippy";
         };
       };
@@ -69,8 +107,10 @@
         {
           name = "nix";
           auto-format = true;
-          formatter = { command = "nixfmt"; };
-          language-servers = [ "nixd" ];
+          formatter = {
+            command = "nixfmt";
+          };
+          language-servers = [ "nil" ];
         }
         {
           name = "rust";
@@ -80,9 +120,32 @@
         {
           name = "python";
           auto-format = true;
-          formatter = { command = "ruff"; args = [ "format" "-" ]; };
+          formatter = {
+            command = "ruff";
+            args = [
+              "format"
+              "-"
+            ];
+          };
         }
       ];
     };
+
+    extraPackages = with pkgs; [
+      basedpyright
+      bash-language-server
+      clang-tools
+      deno
+      gopls
+      lua-language-server
+      marksman
+      nil
+      nixfmt
+      rust-analyzer
+      taplo
+      texlab
+      vscode-langservers-extended
+      yaml-language-server
+    ];
   };
 }

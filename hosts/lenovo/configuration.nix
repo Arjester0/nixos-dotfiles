@@ -31,55 +31,56 @@
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
 
-services.greetd = {
-  enable = true;
+  services.greetd = {
+    enable = true;
 
-  settings.initial_session = {
-    command = "${config.programs.niri.package}/bin/niri-session";
-    user = "arjester";
-  };
-
-  settings.default_session = {
-    command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd ${config.programs.niri.package}/bin/niri-session";
-    user = "greeter";
-  };
-};
-  programs.niri.enable = true;
-  programs.xwayland.enable = true;
-    # Quiet graphical boot
-    boot.plymouth.enable = true;
-    boot.initrd.verbose = false;
-    boot.consoleLogLevel = 3;
-
-    boot.kernelParams = [
-      "quiet"
-      "loglevel=3"
-      "udev.log_level=3"
-      "rd.systemd.show_status=auto"
-      "systemd.show_status=auto"
-    ];
-
-    # Graphical file chooser and desktop portals
-    xdg.portal = {
-      enable = true;
-
-      extraPortals = with pkgs; [
-	xdg-desktop-portal-gtk
-      ];
-
-      config.niri = {
-	default = [ "gnome" "gtk" ];
-
-	# Force the reliable GTK graphical file picker rather than
-	# the GNOME portal trying to delegate to Nautilus.
-	"org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
-      };
+    settings.initial_session = {
+      command = "${config.programs.niri.package}/bin/niri-session";
+      user = "arjester";
     };
 
-    # The locker uses PAM for password authentication
-    security.pam.services.swaylock = { };
+    settings.default_session = {
+      command = "${pkgs.greetd.tuigreet}/bin/tuigreet --remember --time --cmd ${config.programs.niri.package}/bin/niri-session";
+      user = "greeter";
+    };
+  };
+  programs.niri.enable = true;
+  programs.xwayland.enable = true;
+  # Quiet graphical boot
+  boot.plymouth.enable = true;
+  boot.initrd.verbose = false;
+  boot.consoleLogLevel = 3;
 
-  programs.fish.enable = true;
+  boot.kernelParams = [
+    "quiet"
+    "loglevel=3"
+    "udev.log_level=3"
+    "rd.systemd.show_status=auto"
+    "systemd.show_status=auto"
+  ];
+
+  # Graphical file chooser and desktop portals
+  xdg.portal = {
+    enable = true;
+
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
+
+    config.niri = {
+      default = [
+        "gnome"
+        "gtk"
+      ];
+
+      # Force the reliable GTK graphical file picker rather than
+      # the GNOME portal trying to delegate to Nautilus.
+      "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+    };
+  };
+
+  # The locker uses PAM for password authentication
+  security.pam.services.swaylock = { };
 
   programs.steam = {
     enable = true;
@@ -180,7 +181,7 @@ services.greetd = {
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.arjester = {
     isNormalUser = true;
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
     extraGroups = [
       "wheel"
       "wireshark"
@@ -189,6 +190,9 @@ services.greetd = {
       tree
     ];
   };
+
+  # Register Nushell as a valid login shell
+  environment.shells = [ pkgs.nushell ];
 
   programs.firefox.enable = true;
   programs.nix-ld.enable = true;
@@ -202,7 +206,6 @@ services.greetd = {
     btop
     brave
     git
-    tmux
     helix
     waybar
     swaybg
@@ -211,11 +214,8 @@ services.greetd = {
     fastfetch
     zathura
     cava
-    cargo
-    rustc
     jujutsu
     gh
-    gdb
     mako
     libnotify
     pavucontrol
@@ -223,32 +223,18 @@ services.greetd = {
     brightnessctl
     yazi
     quickshell
-    glfw
-    mesa
-    libGL
-    pkg-config
     unzip
-    clang-tools
-    clang
-    tesseract
     syncthing
     codex
-    obsidian
     fish
     emacs
     proton-vpn
-    cmake
-    gcc
-    libtool
-    libvterm
     nil
     nixfmt-rfc-style
-    rust-analyzer
-    rustfmt
-    clippy
     swaylock
     xdg-desktop-portal-gtk
     nautilus
+    nushell
   ];
 
   programs.wireshark = {

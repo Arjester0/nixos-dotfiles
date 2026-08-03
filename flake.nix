@@ -1,5 +1,5 @@
 {
-  description = "Arjester's Based Nixos Configs";
+  description = "Arjester's Nixos Configs";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
