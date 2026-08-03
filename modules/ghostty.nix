@@ -1,18 +1,11 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   programs.ghostty = {
     enable = true;
 
     settings = {
-      # ------------------------------------------------------------
-      # Hoshimachi Suisei / Wallust cyber terminal aesthetic
-      # ------------------------------------------------------------
-
-      # Relative to ~/.config/ghostty/.
-      # Wallust should generate:
-      # ~/.config/ghostty/wallust/colors-ghostty
-      config-file = "wallust/colors-ghostty";
+      theme = "Gruvbox Dark Hard";
 
       font-family = "JetBrainsMono Nerd Font";
       font-size = 12;

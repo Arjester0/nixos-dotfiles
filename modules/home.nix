@@ -22,7 +22,6 @@ let
     is configured not to generate those files.
   */
   linkedConfigs = {
-    niri = "niri";
     rofi = "rofi";
     waybar = "waybar";
     mako = "mako";
@@ -40,7 +39,6 @@ in
     ./direnv.nix
     ./helix.nix
     ./nushell.nix
-    ./zellij.nix
     ./niri.nix
     ./ghostty.nix
   ];

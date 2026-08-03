@@ -6,7 +6,7 @@
     defaultEditor = true;
 
     settings = {
-      theme = "wallust";
+      theme = "gruvbox_dark_hard";
 
       editor = {
         shell = [
@@ -34,7 +34,7 @@
 
         indent-guides = {
           render = true;
-          character = "| ";
+          character = "▏";
         };
 
         file-picker.hidden = false;
@@ -68,20 +68,20 @@
         };
       };
 
+      keys.normal = {
+        D = "extend_to_line_end";
+        C-s = ":write";
+      };
+
+      keys.select = {
+        D = "extend_to_line_end";
+      };
+
       keys.insert = {
         esc = [
           "collapse_selection"
           "normal_mode"
         ];
-
-        normal = {
-          D = "extend_to_line_end";
-          C-s = ":write";
-        };
-
-        select = {
-          D = "extend_to_line_end";
-        };
 
         j = {
           k = [
@@ -144,7 +144,6 @@
       rust-analyzer
       taplo
       texlab
-      vscode-langservers-extended
       yaml-language-server
     ];
   };
