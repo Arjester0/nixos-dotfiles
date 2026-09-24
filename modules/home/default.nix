@@ -1,38 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-
-let
-  dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
-
-  mkOutOfStoreSymlink = path: config.lib.file.mkOutOfStoreSymlink path;
-
-  /*
-    These directories remain manually editable in:
-
-      ~/nixos-dotfiles/config/<name>
-
-    Home Manager creates links from ~/.config/<name>.
-
-    Do not also configure the same application with a Home Manager
-    module that writes files under ~/.config/<name>, unless that module
-    is configured not to generate those files.
-  */
-  linkedConfigs = {
-    rofi = "rofi";
-    waybar = "waybar";
-    mako = "mako";
-    cava = "cava";
-    quickshell = "quickshell";
-    scripts = "scripts";
-    wallust = "wallust";
-    qt5ct = "qt5ct";
-    qt6ct = "qt6ct";
-  };
-in
+{ pkgs, ... }:
 {
   imports = [
     ./cursor.nix
@@ -58,132 +24,44 @@ in
       TERMINAL = "ghostty";
       BROWSER = "brave";
 
-      GTK_THEME = "adw-gtk3-dark";
-      GTK_ICON_THEME = "Papirus-Dark";
-
-      QT_QPA_PLATFORM = "wayland;xcb";
-      QT_QPA_PLATFORMTHEME = "qt5ct";
-      QT_STYLE_OVERRIDE = "adwaita-dark";
-
-      NIXOS_OZONE_WL = "1";
-      MOZ_ENABLE_WAYLAND = "1";
-      ELECTRON_OZONE_PLATFORM_HINT = "auto";
+      PAGER = "less -FR";
     };
 
+    # Programs enabled with `programs.*` below install their own packages.
     packages = with pkgs; [
-      # ----------------------------------------------------------
-      # NCC-style command-line toolkit
-      # ----------------------------------------------------------
-
-      bat
-      bottom
-      btop
-      choose
-      curl
-      delta
-      doggo
-      dust
-      eza
-      fd
-      fzf
-      hyperfine
-      jq
-      ouch
-      procs
-      ripgrep
-      sd
-      tealdeer
-      tokei
-      tree
-      unzip
-      wget
-      xh
-      yazi
-      zip
-
-      # ----------------------------------------------------------
-      # Version control
-      # ----------------------------------------------------------
-
-      gh
-      jujutsu
-      lazygit
-
-      # ----------------------------------------------------------
-      # Nix tools
-      # ----------------------------------------------------------
-
-      deadnix
-      nil
-      nixd
-      nixfmt-rfc-style
-      statix
-
-      # ----------------------------------------------------------
-      # Wayland desktop utilities
-      # ----------------------------------------------------------
-
-      brightnessctl
-      grim
-      libnotify
-      pamixer
-      playerctl
-      slurp
-      swaybg
-      swayidle
-      swaylock
-      wev
-      wl-clipboard
-
-      # Applications configured through linked dotfiles
-      cava
-      quickshell
-      rofi
-      waybar
-
-      # ----------------------------------------------------------
-      # Themes and toolkit configuration
-      # ----------------------------------------------------------
-
-      adw-gtk3
-      adwaita-qt
-      papirus-icon-theme
-
-      libsForQt5.qt5ct
-      qt6Packages.qt6ct
+      bottom choose curl doggo dust fd hyperfine jq ouch procs sd tokei
+      tree unzip wget xh zip jujutsu deadnix statix
+      grim playerctl slurp swayidle wev wl-clipboard
+      brightnessctl libnotify pamixer swaybg swaylock
+      cava quickshell rofi waybar mako xwayland-satellite
+      pavucontrol
+      brave zathura nautilus obs-studio qbittorrent emacs
+      # Shared by Emacs, Helix, and project shells; nixfmt is the sole Nix formatter.
+      basedpyright bash-language-server clang-tools deno gopls
+      lua-language-server marksman nixd nixfmt ruff rust-analyzer
+      taplo texlab yaml-language-server
+      libsForQt5.qt5ct qt6Packages.qt6ct
     ];
   };
 
   programs.home-manager.enable = true;
 
-  # --------------------------------------------------------------
-  # Editable out-of-store configuration links
-  # --------------------------------------------------------------
-
+  # Rofi, Waybar, Mako, Cava, Quickshell, etc. are regular editable
+  # files in ~/.config; Home Manager does not claim or overwrite them.
   xdg = {
     enable = true;
-
-    configFile = lib.mapAttrs (_name: subpath: {
-      source = mkOutOfStoreSymlink "${dotfiles}/${subpath}";
-      recursive = true;
-      force = true;
-    }) linkedConfigs;
-
     mimeApps = {
       enable = true;
-
       defaultApplications = {
         "text/html" = [ "brave-browser.desktop" ];
         "text/xml" = [ "brave-browser.desktop" ];
         "application/xhtml+xml" = [ "brave-browser.desktop" ];
-
         "x-scheme-handler/http" = [ "brave-browser.desktop" ];
         "x-scheme-handler/https" = [ "brave-browser.desktop" ];
         "x-scheme-handler/about" = [ "brave-browser.desktop" ];
         "x-scheme-handler/unknown" = [ "brave-browser.desktop" ];
       };
     };
-
     userDirs = {
       enable = true;
       createDirectories = true;
@@ -295,7 +173,7 @@ in
 
   programs.eza = {
     enable = true;
-    enableNushellIntegration = true;
+    enableNushellIntegration = false;
 
     icons = "auto";
     git = true;
@@ -306,9 +184,7 @@ in
     ];
   };
 
-  programs.fzf = {
-    enable = true;
-  };
+  programs.fzf.enable = true;
 
   programs.ripgrep = {
     enable = true;
@@ -343,58 +219,6 @@ in
       preview = {
         wrap = "yes";
         tab_size = 2;
-      };
-    };
-  };
-
-  # --------------------------------------------------------------
-  # Nushell integrations
-  # --------------------------------------------------------------
-
-  programs.zoxide = {
-    enable = true;
-    enableNushellIntegration = true;
-
-    # Retain normal `cd` while providing `z` for ranked navigation.
-    options = [
-      "--cmd"
-      "z"
-    ];
-  };
-
-  programs.carapace = {
-    enable = true;
-    enableNushellIntegration = true;
-  };
-
-  programs.starship = {
-    enable = true;
-    enableNushellIntegration = true;
-
-    settings = {
-      add_newline = false;
-      command_timeout = 1000;
-
-      character = {
-        success_symbol = "[❯](bold cyan)";
-        error_symbol = "[❯](bold red)";
-        vimcmd_symbol = "[❮](bold cyan)";
-      };
-
-      directory = {
-        truncation_length = 4;
-        truncate_to_repo = false;
-      };
-
-      git_status = {
-        ahead = "⇡\${count}";
-        behind = "⇣\${count}";
-        diverged = "⇕⇡\${ahead_count}⇣\${behind_count}";
-      };
-
-      nix_shell = {
-        symbol = " ";
-        format = "via [$symbol$name]($style) ";
       };
     };
   };

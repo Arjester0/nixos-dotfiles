@@ -1,5 +1,3 @@
-{ pkgs, ... }:
-
 {
   programs.helix = {
     enable = true;
@@ -14,7 +12,7 @@
           "--commands"
         ];
 
-        auto-completion = true;
+        auto-completion = false;
         cursorline = true;
         true-color = true;
         auto-format = true;
@@ -39,12 +37,10 @@
 
         file-picker.hidden = false;
 
-        inline-diagnostics = {
-          cursor-line = "warning";
-          other-lines = "error";
-        };
-
-        lsp.display-inlay-hints = true;
+        # Keep goto-definition without intrusive diagnostics or inlay hints.
+        gutters = [ "spacer" "line-numbers" "spacer" "diff" ];
+        end-of-line-diagnostics = "disable";
+        lsp.display-inlay-hints = false;
 
         soft-wrap.enable = true;
 
@@ -55,7 +51,6 @@
           ];
           center = [ "file-name" ];
           right = [
-            "diagnostics"
             "selections"
             "position"
             "file-encoding"
@@ -94,8 +89,8 @@
 
     languages = {
       language-server = {
-        nil = {
-          command = "nil";
+        nixd = {
+          command = "nixd";
         };
         rust-analyzer = {
           config.cargo.features = "all";
@@ -110,12 +105,12 @@
           formatter = {
             command = "nixfmt";
           };
-          language-servers = [ "nil" ];
+          language-servers = [ { name = "nixd"; except-features = [ "completion" "diagnostics" ]; } ];
         }
         {
           name = "rust";
           auto-format = true;
-          language-servers = [ "rust-analyzer" ];
+          language-servers = [ { name = "rust-analyzer"; except-features = [ "completion" "diagnostics" ]; } ];
         }
         {
           name = "python";
@@ -131,20 +126,5 @@
       ];
     };
 
-    extraPackages = with pkgs; [
-      basedpyright
-      bash-language-server
-      clang-tools
-      deno
-      gopls
-      lua-language-server
-      marksman
-      nil
-      nixfmt
-      rust-analyzer
-      taplo
-      texlab
-      yaml-language-server
-    ];
   };
 }

@@ -123,6 +123,9 @@
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkb.options in tty.itw
   # };
+	
+  # gnome services for protonvpn 
+  services.gnome.gnome-keyring.enable = true;
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
@@ -141,7 +144,7 @@
     modesetting.enable = true;
 
     # RTX 4050 supports NVIDIA's open kernel module.
-    open = true;
+    open = false;
 
     nvidiaSettings = true;
 
@@ -185,6 +188,7 @@
     extraGroups = [
       "wheel"
       "wireshark"
+      "networkmanager"
     ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
       tree
@@ -224,8 +228,6 @@
     yazi
     quickshell
     unzip
-    syncthing
-    codex
     fish
     emacs
     proton-vpn
@@ -235,6 +237,8 @@
     xdg-desktop-portal-gtk
     nautilus
     nushell
+    obs-studio
+    qbittorrent
   ];
 
   programs.wireshark = {

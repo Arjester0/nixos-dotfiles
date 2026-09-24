@@ -1,5 +1,5 @@
 {
-  description = "Arjester's Nixos Configs";
+  description = "Arjester's NixOS configuration";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
@@ -20,7 +20,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.arjester = import ./modules/home.nix;
+              users.arjester = import ./modules/home;
               backupFileExtension = "backup";
             };
           }

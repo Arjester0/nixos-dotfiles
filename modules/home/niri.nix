@@ -1,20 +1,6 @@
 { pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    brightnessctl
-    fcitx5
-    libnotify
-    mako
-    pamixer
-    rofi
-    swaybg
-    swaylock
-    waybar
-    xwayland-satellite
-    yazi
-  ];
-
   xdg.configFile."niri/config.kdl".text = ''
     // ============================================================
     // Arjester Niri configuration
@@ -25,9 +11,9 @@
     // Startup
     // ------------------------------------------------------------
 
-    // This locks the session immediately whenever Niri starts.
-    // Remove this line if the login-time lock is not intentional.
-    spawn-at-startup "swaylock" "-f"
+    // Password login unlocks the keyring. Lock after ten minutes or before sleep.
+    spawn-at-startup "swayidle" "-w" "timeout" "600" "swaylock -f -c 000000 --no-unlock-indicator" "before-sleep" "swaylock -f -c 000000 --no-unlock-indicator"
+    spawn-at-startup "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
 
     spawn-at-startup "bash" "-lc" "$HOME/nixos-dotfiles/config/scripts/start-swaybg.sh"
     spawn-at-startup "waybar"

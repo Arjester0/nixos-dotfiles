@@ -1,0 +1,20 @@
+" Portable fallback editor: copy this file to ~/.vimrc on any Vim machine.
+set nocompatible
+set number relativenumber
+set hidden
+set ignorecase smartcase
+set incsearch
+set undofile
+set expandtab shiftwidth=4 tabstop=4
+set mouse=a
+syntax on
+filetype plugin indent on
+
+" Ctrl-N/Ctrl-P complete only words in the current file. No LSP is involved.
+set complete=.
+set completeopt=menuone,noselect
+
+inoremap jk <Esc>
+xnoremap jk <Esc>
+snoremap jk <Esc>
+tnoremap jk <C-\><C-n>
