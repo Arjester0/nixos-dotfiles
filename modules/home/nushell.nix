@@ -12,6 +12,8 @@
       gd = "git diff";
       gl = "git log";
       lg = "lazygit";
+      
+      jai = "~/jai/bin/jai-linux";
 
       rebuild = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#arjester";
       test-system = "sudo nixos-rebuild test --flake ~/nixos-dotfiles#arjester";

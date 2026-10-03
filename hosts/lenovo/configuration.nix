@@ -199,7 +199,12 @@
   environment.shells = [ pkgs.nushell ];
 
   programs.firefox.enable = true;
-  programs.nix-ld.enable = true;
+  programs.nix-ld = {
+    enable = true; 
+    libraries = with pkgs; [
+	stdenv.cc.cc;
+    ];
+  };
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).

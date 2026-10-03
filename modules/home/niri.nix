@@ -20,6 +20,7 @@
     spawn-at-startup "mako"
     spawn-at-startup "xwayland-satellite"
     spawn-at-startup "fcitx5" "-d"
+    spawn-at-startup "protonvpn-app"
 
     // ------------------------------------------------------------
     // Environment
